@@ -5,6 +5,7 @@
     grid-template-columns: repeat(3, 1fr);
     transform : scale(0.5);
     margin: 20px;
+    transform-origin: top left;
 
 }
 .container-grid{

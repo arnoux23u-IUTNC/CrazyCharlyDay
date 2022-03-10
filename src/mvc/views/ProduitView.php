@@ -5,13 +5,6 @@
 
 namespace custombox\mvc\views;
 
-?>
-<style>
-<?php include '../../../assets/css/main.css'; ?>
-</style>
-<div class="tableau">
-<?php
-
 use custombox\exceptions\ForbiddenException;
 use custombox\mvc\models\Categorie;
 use custombox\mvc\models\Produit;
@@ -96,7 +89,7 @@ class ProduitView extends View
     </body>
     </html>
     HTML;
-        return genererHeader("{$this->product['titre']}") . $html;
+        return genererHeader("{$this->product['titre']}", ['main.css']) . $html;
     }
 
     /**
@@ -115,7 +108,7 @@ class ProduitView extends View
         </body>
         </html>
         HTML;
-        return genererHeader("Produits") . $html;
+        return genererHeader("Produits",['main.css']) . $html;
     }
 
     protected function create(): string
@@ -148,7 +141,7 @@ class ProduitView extends View
         </body>
         </html>
         HTML;
-        return genererHeader("Creer") . $html;
+        return genererHeader("Creer", ['modifierProduit.css']) . $html;
     }
 
     protected function edit(): string
@@ -158,7 +151,7 @@ class ProduitView extends View
         $categ = "";
         foreach ($categorie as $c) {
             if ($this->product['categorie'] === $c ) {
-                $categ .= "<option selected='selected' value={$c['id']} - {$c['nom']} </option><br>";
+                $categ .= "<option selected='selected' value={$c['id']}> {$c['nom']} </option><br>";
             }
             else {
                 $categ .= "<option value=" . $c['id'] . ">" . $c['nom'] . "</option><br>";
@@ -188,9 +181,6 @@ class ProduitView extends View
         </body>
         </html>
         HTML;
-        return genererHeader("Modifier produit") . $html;
+        return genererHeader("Modifier produit",['modifierProduit.css']) . $html;
     }
 }
-?>
-</div>
-<?php

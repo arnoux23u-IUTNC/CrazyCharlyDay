@@ -53,7 +53,6 @@ $app->get("/commandes/{id:[0-9]+}[/]", function ($request, $response, $args) {
     return (new ControllerCommande($this, $request, $response, $args))->show();
 })->setName('commande');
 $app->any("/commandes[/]", function ($request, $response, $args) {
-    //TODO FAIRE
     return (new ControllerCommande($this, $request, $response, $args))->list();
 })->setName('commandesList');
 
@@ -132,6 +131,12 @@ function genererHeader(string $title, array $styles = []): string
     HTML;
     foreach ($styles as $style)
         $html .= "\n\t<link rel='stylesheet' href='/assets/css/$style'>";
-    $html .= "\n</head>\n<body>\n".file_get_contents(__DIR__ . DIRECTORY_SEPARATOR . 'src' . DIRECTORY_SEPARATOR . 'content' . DIRECTORY_SEPARATOR . 'navbar.phtml');;
+    $html .= "\n</head>\n<body>\n" . file_get_contents(__DIR__ . DIRECTORY_SEPARATOR . 'src' . DIRECTORY_SEPARATOR . 'content' . DIRECTORY_SEPARATOR . 'navbar.phtml');
+    $phtmlVars = array(
+        "home" => "https://webetu.iutnc.univ-lorraine.fr/www/arnoux23u/"
+    );
+    foreach ($phtmlVars as $key => $value) {
+        $html = str_replace("%" . $key . "%", $value, $html);
+    }
     return $html;
 }

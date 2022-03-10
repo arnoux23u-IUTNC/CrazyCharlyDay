@@ -25,79 +25,65 @@ class UserView extends View
     {
         $html = genererHeader("Accueil");
         $html .= <<<HTML
-            <body>
-
-<!-- -->
-<div class="contenu">
-    <!-- BLOCK 1 -->
-
-    <div class="notionContenu">
-        <h2 class="title">Les Notions clés</h2>
-        <img src="assets/imgs/notionsdiv.png" class="notionDivIMG">
-    </div>
-
-    <div class="parag1">
-        <div>
-            <h1 class="title">L'ATELIER 17.91 C'EST QUOI ?</h1>
-        </div>
-        <div>
-            <h2 class="beneTitle">L'association contribue à des solutions créatives et solidaires, en toute
-                confiance.</h2>
-        </div>
-        <div>
-            <a class="createBox" href="">Créer ma box</a>
-        </div>
-        <div>
-            <p> L’idée est venue du constat que l’isolement et la précarité sont des situations qui peuvent toucher
-                tout le monde,
-                à toutes étapes de la vie. Etre issue d’une “bonne” classe sociale ne garantit pas que l’on sera
-                accompagné par un cercle d’amis ou familial toute la vie.
-                Des situations peuvent avoir lieu peu importe son âge, son origine, son emploi, sa situation
-                professionnelle et financière.
-                Avec l’Atelier 17.91, nous souhaitons contribuer à améliorer la société de demain en créant du lien
-                entre les personnes,
-                montrer que des dispositifs existent quelle que soit sa situation personnelle,
-                et surtout que l’isolement, l’exclusion et la précarité ne doivent pas définir la nature d’une
-                personne.</p>
-        </div>
-    </div>
-
-
-    <!-- BLOCK 1 END -->
-
-    <div class="parag2">
-        <div>
-            <h2 class="title">Pourquoi avez-vous créer l'Atelier 17.91 ?</h2>
-        </div>
-        <div>
-            <p> La crise sanitaire nous a fait prendre conscience de la nécessité de "retourner sur le terrain", d'être
-                au
-                contact des personnes et créer du lien avec et entre elles.
-                Après une expérience significative dans l'associatif, nous avions envie de créer quelque chose à notre
-                image, respectant des valeurs qui nous sont chères,
-                et qui répondent à des problématiques sociales et sociétales actuelles. C'est tout naturellement que
-                l'Atelier 17.91 a vu le jour !</p>
-        </div>
-    </div>
-
-    <div class="parag3">
-        <div>
-            <h2 class="title">Nos missions</h2>
-        </div>
-        <div>
-            <img src="assets/imgs/ourmissions.png" class="missionPicture">
-        </div>
-    </div>
-
-</div>
-
-</body>
-
-<footer>
-    <div class="footer">
-        <p>©2022 L'ATELIER 17.91</p>
-    </div>
-</footer>
+            <div class="contenu">
+                <div class="notionContenu">
+                    <h2 class="title">Les Notions clés</h2>
+                    <img alt="notions" src="/assets/images/imgs/notionsdiv.png" class="notionDivIMG">
+                </div>
+                <div class="parag1">
+                    <div>
+                        <h1 class="title">L'ATELIER 17.91 C'EST QUOI ?</h1>
+                    </div>
+                    <div>
+                        <h2 class="beneTitle">L'association contribue à des solutions créatives et solidaires, en toute
+                        confiance.</h2>
+                    </div>
+                    <div>
+                        <a class="createBox" href="{$this->container['router']->pathFor('creerCommande')}">Créer ma commande</a>
+                    </div>
+                    <div>
+                        <p> L’idée est venue du constat que l’isolement et la précarité sont des situations qui peuvent toucher
+                        tout le monde,
+                        à toutes étapes de la vie. Etre issue d’une “bonne” classe sociale ne garantit pas que l’on sera
+                        accompagné par un cercle d’amis ou familial toute la vie.
+                        Des situations peuvent avoir lieu peu importe son âge, son origine, son emploi, sa situation
+                        professionnelle et financière.
+                        Avec l’Atelier 17.91, nous souhaitons contribuer à améliorer la société de demain en créant du lien
+                        entre les personnes,
+                        montrer que des dispositifs existent quelle que soit sa situation personnelle,
+                        et surtout que l’isolement, l’exclusion et la précarité ne doivent pas définir la nature d’une
+                        personne.</p>
+                    </div>
+                </div>
+                <div class="parag2">
+                    <div>
+                        <h2 class="title">Pourquoi avez-vous créer l'Atelier 17.91 ?</h2>
+                    </div>
+                    <div>
+                        <p> La crise sanitaire nous a fait prendre conscience de la nécessité de "retourner sur le terrain", d'être
+                        au
+                        contact des personnes et créer du lien avec et entre elles.
+                        Après une expérience significative dans l'associatif, nous avions envie de créer quelque chose à notre
+                        image, respectant des valeurs qui nous sont chères,
+                        et qui répondent à des problématiques sociales et sociétales actuelles. C'est tout naturellement que
+                        l'Atelier 17.91 a vu le jour !</p>
+                    </div>
+                </div>
+                <div class="parag3">
+                    <div>
+                        <h2 class="title">Nos missions</h2>
+                    </div>
+                    <div>
+                        <img src="/assets/images/imgs/ourmissions.png" class="missionPicture">
+                    </div>
+                </div>
+            </div>
+            <footer>
+                <div class="footer">
+                    <p>©2022 L'ATELIER 17.91</p>
+                </div>
+            </footer>
+        </body>
         </html>
         HTML;
         return $html;
