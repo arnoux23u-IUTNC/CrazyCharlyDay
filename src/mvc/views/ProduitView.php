@@ -7,7 +7,7 @@ namespace custombox\mvc\views;
 
 ?>
 <style>
-<?php include 'main.css'; ?>
+<?php include '../../../assets/css/main.css'; ?>
 </style>
 <div class="tableau">
 <?php
