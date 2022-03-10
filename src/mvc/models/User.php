@@ -4,17 +4,16 @@ namespace customBox\models;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Categorie extends Model
+class User extends Model
 {
 
-    protected $table = 'ccd_categorie';
+    protected $table = 'ccd_user';
     protected $primaryKey = 'id';
     public $incrementing = true;
     public $timestamps = false;
 
-    public function produits()
+    public function commandes()
     {
-        return $this->hasMany('customBox\models\Produit', 'id_categorie');
+        return $this->hasMany('src\mvc\models\Commande', 'id_user');
     }
-
 }
