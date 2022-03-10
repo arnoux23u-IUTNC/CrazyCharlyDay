@@ -20,6 +20,6 @@ class Commande extends Model
         return $this->belongsTo('custombox\mvc\models\Boite', 'id_boite');
     }
     public function produits(){
-        return $this->belongsToMany('custombox\mvc\models\Produit', 'ccd_contenucommande', 'id_commande', 'id_produit');
+        return $this->belongsToMany('custombox\mvc\models\Produit', 'ccd_contenucommande', 'id_commande', 'id_produit')->withPivot('qte');
     }
 }

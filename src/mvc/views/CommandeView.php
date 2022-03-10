@@ -40,9 +40,8 @@ class CommandeView extends View
         foreach($this->command->produits as $produit){
             $products .= <<<HTML
                 <tr>
-                    <th scope="row">{$produit['id']}</th>
-                    <td>7</td>
-                    <td>7,223</td>
+                    <th scope="row">{$produit['titre']}</th>
+                    <td>{$produit->pivot->qte}</td>
                 </tr>
             HTML;
         }
@@ -65,11 +64,20 @@ class CommandeView extends View
                                 <tr>
                                     <th>Nom</th>
                                     <th>Quantité</th>
-                                    <th>Prix</th>
                                 </tr>
-                                $products
                             </thead>
                             <tbody>
+                                $products
+                            </tbody>
+                        </table>
+                    </div>      
+                </div>
+                <div class="row">
+                    <p style="background-color: {$this->command->couleur_boite}" >couleur boite</p>
+                </div>
+            </div>
+        </body>     
+        </html>
         HTML;
     }
 
@@ -98,7 +106,6 @@ class CommandeView extends View
     public function render(int $method, int $access_level = Renderer::OTHER_MODE, $user = null): string
     {
         return match ($method) {
-            Renderer::REGISTER => $this->register(),
             Renderer::CREATE => $this->create(),
             default => parent::render($method, $access_level),
         };

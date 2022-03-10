@@ -29,7 +29,7 @@ class ControllerBoite
         $this->container = $c;
         $this->boite = Boite::where("id", "LIKE", filter_var($args['id'] ?? "", FILTER_SANITIZE_NUMBER_INT))->first();
         $this->renderer = new BoiteView($this->container, $this->boite, $request);
-        $this->user = User::find($_SESSION['USER_ID'] ?? "-1") ?? NULL;
+        $this->user = User::find($_SESSION['USER_ID'] ?? -1) ?? NULL;
         $this->request = $request;
         $this->response = $response;
         $this->args = $args;

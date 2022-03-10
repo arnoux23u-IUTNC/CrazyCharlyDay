@@ -4,6 +4,8 @@ SET time_zone = "+00:00";
 
 USE `USERNAME`;
 
+DROP TABLE IF EXISTS `ccd_contenucommande`;
+DROP TABLE IF EXISTS `ccd_commande`;
 DROP TABLE IF EXISTS `ccd_boite`;
 DROP TABLE IF EXISTS `ccd_produit`;
 DROP TABLE IF EXISTS `ccd_categorie`;
@@ -69,7 +71,7 @@ CREATE TABLE `ccd_users`
     `firstname`  varchar(40)  NOT NULL,
     `password`   varchar(255) NOT NULL,
     `mail`       varchar(100) NOT NULL,
-    `phone`       varchar(100) NOT NULL,
+    `phone`      varchar(100) NOT NULL,
     `created_at` timestamp    NOT NULL DEFAULT current_timestamp(),
     `updated`    timestamp    NULL     DEFAULT NULL,
     `last_login` timestamp    NULL     DEFAULT NULL,
@@ -87,6 +89,18 @@ ALTER TABLE `ccd_users`
     MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT;
 COMMIT;
 
+CREATE TABLE `ccd_commande`
+(
+    `id`       int(11) NOT NULL,
+    `id_user`  int(11) NOT NULL,
+    `id_boite` int(11) NOT NULL,
+    `couleur_boite` varchar(255) NOT NULL DEFAULT '#000000',
+    `paye`     BOOLEAN
+) ENGINE = InnoDB
+  DEFAULT CHARSET = utf8;
+
+
+
 ALTER TABLE `ccd_boite`
     ADD PRIMARY KEY (`id`);
 ALTER TABLE `ccd_categorie`
@@ -94,6 +108,31 @@ ALTER TABLE `ccd_categorie`
 ALTER TABLE `ccd_produit`
     ADD PRIMARY KEY (`id`),
     ADD KEY `categorie` (`categorie`);
+
+ALTER TABLE `ccd_commande`
+    ADD PRIMARY KEY (`id`);
+ALTER TABLE `ccd_commande`
+    MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+ALTER TABLE `ccd_commande`
+    ADD CONSTRAINT `commande_fk_user` FOREIGN KEY (`id_user`) REFERENCES `ccd_users` (`user_id`);
+ALTER TABLE `ccd_commande`
+    ADD CONSTRAINT `commande_fk_boite` FOREIGN KEY (`id_boite`) REFERENCES `ccd_boite` (`id`);
+
+CREATE TABLE `ccd_contenucommande`
+(
+    `id_commande` int(11) NOT NULL,
+    `id_produit`  int(11) NOT NULL,
+    `qte` int(11) NOT NULL
+) ENGINE = InnoDB
+  DEFAULT CHARSET = utf8;
+
+ALTER TABLE `ccd_contenucommande`
+    ADD CONSTRAINT `contenucommande_fk_commande` FOREIGN KEY (`id_commande`) REFERENCES `ccd_commande` (`id`);
+ALTER TABLE `ccd_contenucommande`
+    ADD CONSTRAINT `contenucommande_fk_boite` FOREIGN KEY (`id_produit`) REFERENCES `ccd_produit` (`id`);
+ALTER TABLE `ccd_contenucommande`
+    ADD PRIMARY KEY (`id_commande`, `id_produit`);
+
 ALTER TABLE `ccd_boite`
     MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,
     AUTO_INCREMENT = 4;

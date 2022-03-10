@@ -7,6 +7,7 @@ abstract class Renderer
 
     const SHOW = 0;
     const SHOW_IN_LIST = 1;
+    const SHOW_IN_LIST_MIN = 11;
     const SHOW_ALL = 2;
     const CREATE = 3;
     const EDIT = 4;

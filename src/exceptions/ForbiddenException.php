@@ -11,8 +11,8 @@ class ForbiddenException extends Exception
 
     public function __construct(string $title = "Forbidden", string $message = "Forbidden")
     {
-        self::$title = $title;
-        parent::__construct($message);
+        self::$title = $message;
+        parent::__construct($title);
     }
 
     public function getTitle(): string

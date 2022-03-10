@@ -46,10 +46,17 @@ $app->get("/users[/]", function ($request, $response, $args) {
 })->setName('usersList');
 
 //--Commandes
-$app->any("commandes/", function ($request, $response, $args) {
+$app->any("/commandes/creer[/]", function ($request, $response, $args) {
+    return (new ControllerCommande($this, $request, $response, $args))->create();
+})->setName('creerCommande');
+$app->get("/commandes/{id:[0-9]+}[/]", function ($request, $response, $args) {
+    return (new ControllerCommande($this, $request, $response, $args))->show();
+})->setName('commande');
+$app->any("/commandes[/]", function ($request, $response, $args) {
     //TODO FAIRE
     return (new ControllerCommande($this, $request, $response, $args))->list();
 })->setName('commandesList');
+
 
 //--Produits
 $app->any('/produits/{id:[0-9]+}/edit[/]', function ($request, $response, $args) {
@@ -83,8 +90,6 @@ $app->get('/boites[/]', function ($request, $response, $args) {
 $app->get('/', function ($request, $response) {
     return (new ControllerUser($this, $request, $response, []))->home();
 })->setName('home');
-
-
 
 
 #Demmarage de l'application

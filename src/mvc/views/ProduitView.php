@@ -1,5 +1,8 @@
 <?php
 
+
+//TODO
+
 namespace custombox\mvc\views;
 
 ?>
@@ -34,15 +37,15 @@ class ProduitView extends View
         return match ($method) {
             Renderer::EDIT => $this->edit(),
             Renderer::SHOW_ALL => $this->all(),
-            Renderer::SHOW_IN_LIST => $this->forList(),
+            Renderer::SHOW_IN_LIST_MIN => $this->forList(true),
             Renderer::CREATE => $this->create(),
             default => parent::render($method, $access_level),
         };
     }
 
-    protected function forList(): string
+    protected function forList($min = false): string
     {
-        return <<<HTML
+        return !$min ? <<<HTML
             <div class="card">
                 <div class="card-body">
                     <div class="block">
@@ -53,6 +56,20 @@ class ProduitView extends View
                     </div>
                     <img src="/assets/images/produits/{$this->product['id']}.jpg" alt="{$this->product['description']}">
                 </div>
+            </div>
+        </body>
+        </html>
+        HTML : <<<HTML
+            <div style=" display: flex; flex-direction: row; border:1px solid black; width: 33vw;">
+                <div style="font-size: 10px;">
+                    <p>{$this->product['titre']}</p>
+                    <p><b>Description</b> : {$this->product['description']}</p>
+                    <p><b>Categorie</b> : {$this->product['categorie']}</p>
+                    <p><b>Poids</b> : {$this->product['poids']} kg</p>
+                    <label style="font-size: 15px" for="{$this->product['id']}">Qte :</label>
+                    <input value="0" type="number" min="0" name="{$this->product['id']}"  />
+                </div>
+                <img style="width: auto; height: 15vh; margin: 0 !important; border-radius: 0 !important;" src="/assets/images/produits/{$this->product['id']}.jpg" alt="{$this->product['description']}">
             </div>
         </body>
         </html>

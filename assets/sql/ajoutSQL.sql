@@ -17,7 +17,7 @@ ALTER TABLE `ccd_commande`
 CREATE TABLE `ccd_contenucommande`
 (
     `id_commande` int(11) NOT NULL,
-    `id_produit`  int(11) NOT NULL,
+    `id_produit`  int(11) NOT NULL
 ) ENGINE = InnoDB
   DEFAULT CHARSET = utf8;
 
@@ -26,4 +26,4 @@ ALTER TABLE `ccd_contenucommande`
 ALTER TABLE `ccd_contenucommande`
     ADD CONSTRAINT `contenucommande_fk_boite` FOREIGN KEY (`id_produit`) REFERENCES `ccd_produit` (`id`);
 ALTER TABLE `ccd_contenucommande`
-    ADD PRIMARY KEY (`id-commande,id_produit`);
+    ADD PRIMARY KEY (`id_commande,id_produit`);

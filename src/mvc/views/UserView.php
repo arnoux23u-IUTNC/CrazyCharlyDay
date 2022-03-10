@@ -138,15 +138,15 @@ class UserView extends View
     private function list(): string
     {
         $usersHtml = "";
-        foreach (User::where('user_id','!=',$this->user['user_id'])->get() as $user) {
-            $usersHtml .= (new UserView($this->container, $user, $this->request))->render(Renderer::SHOW_IN_LIST, user:$user);
+        foreach (User::where('user_id', '!=', $this->user['user_id'])->get() as $user) {
+            $usersHtml .= (new UserView($this->container, $user, $this->request))->render(Renderer::SHOW_IN_LIST, user: $user);
         }
         return genererHeader("Liste des utilisateurs") . $usersHtml;
     }
 
     #[Pure] private function forList($user): string
     {
-        $adminBtn = $user->isAdmin()  ? "<a href='{$this->container['router']->pathFor('switchAdmin', ['id' => $user['user_id']])}' class='btn btn-sm btn-primary'>Supprimer droit Admin</a>" : "<a href='{$this->container['router']->pathFor('switchAdmin', ['id' => $user['user_id']])}' class='btn btn-sm btn-danger'>Ajouter droit Admin</a>";
+        $adminBtn = $user->isAdmin() ? "<a href='{$this->container['router']->pathFor('switchAdmin', ['id' => $user['user_id']])}' class='btn btn-sm btn-primary'>Supprimer droit Admin</a>" : "<a href='{$this->container['router']->pathFor('switchAdmin', ['id' => $user['user_id']])}' class='btn btn-sm btn-danger'>Ajouter droit Admin</a>";
         return <<<HTML
             <div style="border: 1px solid black;" class="container">
                 <p>Utilisateur : {$user['username']}</p>
