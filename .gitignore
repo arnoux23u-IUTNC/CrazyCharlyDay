@@ -1,0 +1,11 @@
+/vendor/
+*.phar
+
+.vscode/
+.idea/
+
+src/conf/conf.ini
+
+.htaccess
+
+.phpdoc/
