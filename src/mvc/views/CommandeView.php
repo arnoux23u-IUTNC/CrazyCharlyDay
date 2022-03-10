@@ -106,7 +106,7 @@ class CommandeView extends View
     public function all(): string {
         $html ='';
         foreach (Commande::all() as $commande){
-            $html .= (new CommandeView($this->container,$commande))->render(Renderer::SHOW);
+            $html .= (new CommandeView($this->container,$commande, $this->request))->render(Renderer::SHOW);
         }
         return genererHeader("Liste des Commandes"). <<<HTML
             <div>
