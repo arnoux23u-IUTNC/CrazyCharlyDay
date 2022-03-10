@@ -6,7 +6,7 @@ require_once __DIR__ . DIRECTORY_SEPARATOR . 'vendor' . DIRECTORY_SEPARATOR . 'a
 use Slim\{App, Container};
 use custombox\db\Eloquent;
 use custombox\exceptions\ExceptionHandler;
-use custombox\mvc\controllers\{ControllerBoite, ControllerUser, ControllerProduits};
+use custombox\mvc\controllers\{ControllerBoite, ControllerCommande, ControllerUser, ControllerProduits};
 
 #Container
 $container = new Container();
@@ -65,7 +65,10 @@ $app->get('/produits[/]', function ($request, $response, $args) {
     return (new ControllerProduits($this, $request, $response, $args))->displayAll();
 })->setName('afficherProduits');
 
-//--Boites
+//--
+$app->any('/boites/{id:[0-9]+}/edit[/]', function ($request, $response, $args) {
+    return (new ControllerBoite($this, $request, $response, $args))->edit();
+})->setName('modifierBoite');
 $app->any('/boites/creer[/]', function ($request, $response) {
     return (new ControllerBoite($this, $request, $response, []))->create();
 })->setName('creerBoite');

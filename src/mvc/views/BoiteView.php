@@ -100,4 +100,25 @@ HTML;
 
         return genererHeader("Creer") . $html;
     }
+
+    protected function edit(): string
+    {
+        $url = $this->container['router']->pathFor('modifierBoite');
+        $html = <<<HTML
+            <form action='$url' method='POST'>
+			    <h2>Modifier la boite</h2>
+			    			    
+			    <label>Taille de la boite</label>
+			    <input type='text' name='taille' placeholder='' value="$this->boite[taille]" required><br>
+			    <label>Entrez un poids</label>
+			    <input type='number' name='poids' value="$this->boite[poidsmax]"  min="0" step="0.01" required><br>
+			
+			    <button type='submit' name='submit' value='create'>Modifier Boite</button>
+			</form>
+        </body>
+        </html>
+HTML;
+        return genererHeader("Creer") . $html;
+    }
+
 }

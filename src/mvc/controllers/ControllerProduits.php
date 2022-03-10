@@ -81,7 +81,7 @@ class ControllerProduits
      */
     public function edit(): Response
     {
-        if ( !empty($this->user) && !$this->user->isAdmin())
+        if ( empty($this->user) || !$this->user->isAdmin())
             throw new ForbiddenException("Accès refusé");
         if (empty($this->product))
             throw new NotFoundException($this->request, $this->response);
@@ -90,12 +90,10 @@ class ControllerProduits
                 return $this->response->write($this->renderer->render(Renderer::EDIT));
             case 'POST':
                 $this->product->update([
-                    //TODO
-                    'titre' => filter_var($this->request->getParsedBodyParam('titre'), FILTER_SANITIZE_STRING),
-                    'description' => filter_var($this->request->getParsedBodyParam('description'), FILTER_SANITIZE_FULL_SPECIAL_CHARS),
-                    'expiration' => $this->request->getParsedBodyParam('expiration') !== "" ? filter_var($this->request->getParsedBodyParam('expiration'), FILTER_SANITIZE_STRING) : NULL,
-                    'public_key' => filter_var($this->request->getParsedBodyParam('public_key'), FILTER_SANITIZE_STRING),
-                    'is_public' => filter_var($this->request->getParsedBodyParam('conf') ?? 0, FILTER_SANITIZE_NUMBER_INT),
+                    'titre' => filter_var($this->request->getParsedBodyParam('name'), FILTER_SANITIZE_STRING),
+                    'description' => filter_var($this->request->getParsedBodyParam('desc'), FILTER_SANITIZE_FULL_SPECIAL_CHARS),
+                    'categorie' => filter_var($this->request->getParsedBodyParam('categ'),FILTER_SANITIZE_NUMBER_INT),
+                    'poids' => filter_var($this->request->getParsedBodyParam('poids'),FILTER_SANITIZE_NUMBER_FLOAT,FILTER_FLAG_ALLOW_FRACTION)
                 ]);
                 return $this->response->withRedirect($this->container['router']->pathFor('afficherProduit', ["id" => $this->product->id]));
             default:

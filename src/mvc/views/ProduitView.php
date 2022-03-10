@@ -32,6 +32,7 @@ class ProduitView extends View
     public function render(int $method, int $access_level = Renderer::OTHER_MODE): string
     {
         return match ($method) {
+            Renderer::EDIT => $this->edit(),
             Renderer::SHOW_ALL => $this->all(),
             Renderer::SHOW_IN_LIST => $this->forList(),
             Renderer::CREATE => $this->create(),
@@ -132,12 +133,12 @@ class ProduitView extends View
 
     protected function edit(): string
     {
-        $url = $this->container['router']->pathFor('modifierProduit');
+        $url = $this->container['router']->pathFor('modifierProduit', ['id'=>$this->product['id']]);
         $categorie = Categorie::all();
         $categ = "";
         foreach ($categorie as $c) {
             if ($this->product['categorie'] === $c ) {
-                $categ .= "<option selected='selected' value='" . $c['id'] . "'>" . $c['nom'] . "</option><br>";
+                $categ .= "<option selected='selected' value={$c['id']} - {$c['nom']} </option><br>";
             }
             else {
                 $categ .= "<option value=" . $c['id'] . ">" . $c['nom'] . "</option><br>";
@@ -146,12 +147,12 @@ class ProduitView extends View
         }
         $html = <<<HTML
             <form action='$url' method='POST'>
-                <h2>Creer un nouveau produit</h2>
+                <h2>Modifier le produit</h2>
                 <label>Nom du produit</label>
-                <input type='text' name='name' placeholder='' value="$this->product[titre]" required><br>
+                <input type='text' name='name' placeholder='' value="{$this->product['titre']}" required><br>
                 
                 <label>Entrez une description</label>
-                <input type='text' name='desc' placeholder='' value="$this->product[description]" required><br>
+                <input type='text' name='desc' placeholder='' value="{$this->product['description']}" required><br>
                 
                 <label>Selectionnez une catégorie</label>
                 <select name="categ">
@@ -159,7 +160,7 @@ class ProduitView extends View
                 </select><br>
                 
                 <label>Entrez un poids</label>
-                <input type='number' name='poids' value="$this->product[poids]"  min="0" step="0.01" required><br>
+                <input type='number' name='poids' value="{$this->product['poids']}"  min="0" step="0.01" required><br>
                 
                 <button type='submit' name='submit' value='create'>Modifier Item</button>
               
@@ -167,7 +168,7 @@ class ProduitView extends View
         </body>
         </html>
         HTML;
-        return genererHeader("Creer") . $html;
+        return genererHeader("Modifier produit") . $html;
     }
 }
 ?>

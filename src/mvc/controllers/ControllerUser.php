@@ -185,7 +185,7 @@ class ControllerUser
     public function switchAdmin(): Response{
         if(!$this->request->getMethod() == 'POST')
             throw new MethodNotAllowedException($this->request, $this->response, ['POST']);
-        if( !empty($this->user) && !$this->user->isAdmin())
+        if( empty($this->user) || !$this->user->isAdmin())
             throw new ForbiddenException(message: "Acces interdit");
         $user_id = filter_var($this->args['id'], FILTER_VALIDATE_INT) ?? NULL;
         if(!$user_id)
@@ -220,7 +220,7 @@ class ControllerUser
      */
     public function list(): Response
     {
-        if ( !empty($this->user) && !$this->user->isAdmin()) {
+        if ( empty($this->user) || !$this->user->isAdmin()) {
             throw new ForbiddenException(message: "Acces interdit");
         }
         return $this->response->write($this->renderer->render(Renderer::SHOW_ALL));

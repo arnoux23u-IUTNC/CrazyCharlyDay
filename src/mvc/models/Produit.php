@@ -13,6 +13,7 @@ class Produit extends Model
     protected $table = 'ccd_produit';
     protected $primaryKey = 'id';
     public $incrementing = true;
+    public $guarded = ['id'];
     public $timestamps = false;
 
     public function categorie()
