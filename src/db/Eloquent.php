@@ -32,6 +32,7 @@ class Eloquent
         try {
             $capsule->getConnection()->getPdo();
         } catch (Exception $e) {
+            print_r($e->getMessage());
             header('HTTP/1.1 500 Internal Server Error');
             require_once __DIR__ . DIRECTORY_SEPARATOR . '..' . DIRECTORY_SEPARATOR . '..' . DIRECTORY_SEPARATOR . 'errors' . DIRECTORY_SEPARATOR . '500.html';
             exit();
