@@ -146,7 +146,7 @@ class UserView extends View
 
     #[Pure] private function forList($user): string
     {
-        $adminBtn = $user->isAdmin() ? "<a href='{$this->container['router']->pathFor('switchAdmin', ['id' => $user['user_id']])}' class='btn btn-sm btn-primary'>Supprimer droit Admin</a>" : "<a href='{$this->container['router']->pathFor('switchAdmin', ['id' => $user['user_id']])}' class='btn btn-sm btn-danger'>Ajouter droit Admin</a>";
+        $adminBtn = $user->isAdmin()  ? "<a href='{$this->container['router']->pathFor('switchAdmin', ['id' => $user['user_id']])}' class='btn btn-sm btn-primary'>Supprimer droit Admin</a>" : "<a href='{$this->container['router']->pathFor('switchAdmin', ['id' => $user['user_id']])}' class='btn btn-sm btn-danger'>Ajouter droit Admin</a>";
         return <<<HTML
             <div style="border: 1px solid black;" class="container">
                 <p>Utilisateur : {$user['username']}</p>

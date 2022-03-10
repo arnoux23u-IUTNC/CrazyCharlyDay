@@ -81,7 +81,7 @@ class ControllerProduits
      */
     public function edit(): Response
     {
-        if (!$this->user->isAdmin())
+        if ( !empty($this->user) && !$this->user->isAdmin())
             throw new ForbiddenException("Accès refusé");
         if (empty($this->product))
             throw new NotFoundException($this->request, $this->response);

@@ -60,7 +60,7 @@ class ControllerBoite
      */
     public function create(): Response
     {
-        if(!$this->user->isAdmin())
+        if( !empty($this->user) && !$this->user->isAdmin())
             throw new ForbiddenException("Vous n'avez pas les droits pour créer une boite");
         switch ($this->request->getMethod()){
             case 'GET':

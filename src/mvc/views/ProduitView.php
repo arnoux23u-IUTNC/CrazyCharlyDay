@@ -129,6 +129,46 @@ class ProduitView extends View
         HTML;
         return genererHeader("Creer") . $html;
     }
+
+    protected function edit(): string
+    {
+        $url = $this->container['router']->pathFor('modifierProduit');
+        $categorie = Categorie::all();
+        $categ = "";
+        foreach ($categorie as $c) {
+            if ($this->product['categorie'] === $c ) {
+                $categ .= "<option selected='selected' value='" . $c['id'] . "'>" . $c['nom'] . "</option><br>";
+            }
+            else {
+                $categ .= "<option value=" . $c['id'] . ">" . $c['nom'] . "</option><br>";
+            }
+
+        }
+        $html = <<<HTML
+            <form action='$url' method='POST'>
+                <h2>Creer un nouveau produit</h2>
+                <label>Nom du produit</label>
+                <input type='text' name='name' placeholder='' value="$this->product[titre]" required><br>
+                
+                <label>Entrez une description</label>
+                <input type='text' name='desc' placeholder='' value="$this->product[description]" required><br>
+                
+                <label>Selectionnez une catégorie</label>
+                <select name="categ">
+                $categ
+                </select><br>
+                
+                <label>Entrez un poids</label>
+                <input type='number' name='poids' value="$this->product[poids]"  min="0" step="0.01" required><br>
+                
+                <button type='submit' name='submit' value='create'>Modifier Item</button>
+              
+            </form>
+        </body>
+        </html>
+        HTML;
+        return genererHeader("Creer") . $html;
+    }
 }
 ?>
 </div>
