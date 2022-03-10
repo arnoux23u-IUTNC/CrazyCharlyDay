@@ -1,6 +1,6 @@
 <?php
 
-namespace customBox\models;
+namespace custombox\models;
 
 use Illuminate\Database\Eloquent\Model;
 
@@ -14,9 +14,9 @@ class Produit extends Model
 
     public function categorie()
     {
-        return $this->belongsTo('customBox\models\Categorie', 'id_categorie');
+        return $this->belongsTo('custombox\models\Categorie', 'id_categorie');
     }
     public function commandes(){
-        return $this->belongsToMany('customBox\models\Commande', 'ccd_contenucommande', 'id_produit', 'id_commande');
+        return $this->belongsToMany('custombox\models\Commande', 'ccd_contenucommande', 'id_produit', 'id_commande');
     }
 }

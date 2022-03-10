@@ -1,6 +1,6 @@
 <?php
 
-namespace customBox\models;
+namespace custombox\models;
 
 use Illuminate\Database\Eloquent\Model;
 
@@ -14,6 +14,6 @@ class User extends Model
 
     public function commandes()
     {
-        return $this->hasMany('src\mvc\models\Commande', 'id_user');
+        return $this->hasMany('custombox\models\Commande', 'id_user');
     }
 }

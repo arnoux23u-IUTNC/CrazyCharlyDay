@@ -7,3 +7,4 @@
 src/conf/conf.ini
 
 .phpdoc/
+composer.lock
