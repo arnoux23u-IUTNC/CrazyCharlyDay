@@ -128,9 +128,10 @@ function genererHeader(string $title, array $styles = []): string
         <link href="https://fonts.googleapis.com/css?family=Poiret+One" rel="stylesheet">
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" integrity="sha512-1ycn6IcaQQ40/MKBW2W4Rhis/DbILU74C1vSrLJxCq57o941Ym01SwNsOMqvEBFlcgUa6xLiPY/NS5R+E6ztJQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
         <title>$title - CustomBox</title>
+        <link rel="stylesheet" href="/assets/css/global.css">
     HTML;
     foreach ($styles as $style)
         $html .= "\n\t<link rel='stylesheet' href='/assets/css/$style'>";
-    $html .= "\n</head>\n<body>\n";
+    $html .= "\n</head>\n<body>\n".file_get_contents(__DIR__ . DIRECTORY_SEPARATOR . 'src' . DIRECTORY_SEPARATOR . 'content' . DIRECTORY_SEPARATOR . 'navbar.phtml');;
     return $html;
 }
