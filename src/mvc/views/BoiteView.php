@@ -4,7 +4,7 @@ namespace custombox\mvc\views;
 
 ?>
 <style>
-<?php include 'modierProduit.css'; ?>
+<?php include '../../../assets/css/modifierProduit.css'; ?>
 </style>
 <div class="tableau">
 <?php

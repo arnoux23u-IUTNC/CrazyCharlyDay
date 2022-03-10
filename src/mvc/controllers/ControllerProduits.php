@@ -52,8 +52,14 @@ class ControllerProduits
         return $this->response->write($this->renderer->render(Renderer::SHOW_ALL));
     }
 
+    /**
+     * @throws ForbiddenException
+     * @throws MethodNotAllowedException
+     */
     public function create(): Response
     {
+        if (empty($this->user) || !$this->user->isAdmin())
+            throw new ForbiddenException("Vous n'avez pas les droits pour créer un produit");
         switch ($this->request->getMethod()) {
             case 'GET':
                 return $this->response->write($this->renderer->render(Renderer::CREATE));
@@ -81,7 +87,7 @@ class ControllerProduits
      */
     public function edit(): Response
     {
-        if ( empty($this->user) || !$this->user->isAdmin())
+        if (empty($this->user) || !$this->user->isAdmin())
             throw new ForbiddenException("Accès refusé");
         if (empty($this->product))
             throw new NotFoundException($this->request, $this->response);
@@ -92,8 +98,8 @@ class ControllerProduits
                 $this->product->update([
                     'titre' => filter_var($this->request->getParsedBodyParam('name'), FILTER_SANITIZE_STRING),
                     'description' => filter_var($this->request->getParsedBodyParam('desc'), FILTER_SANITIZE_FULL_SPECIAL_CHARS),
-                    'categorie' => filter_var($this->request->getParsedBodyParam('categ'),FILTER_SANITIZE_NUMBER_INT),
-                    'poids' => filter_var($this->request->getParsedBodyParam('poids'),FILTER_SANITIZE_NUMBER_FLOAT,FILTER_FLAG_ALLOW_FRACTION)
+                    'categorie' => filter_var($this->request->getParsedBodyParam('categ'), FILTER_SANITIZE_NUMBER_INT),
+                    'poids' => filter_var($this->request->getParsedBodyParam('poids'), FILTER_SANITIZE_NUMBER_FLOAT, FILTER_FLAG_ALLOW_FRACTION)
                 ]);
                 return $this->response->withRedirect($this->container['router']->pathFor('afficherProduit', ["id" => $this->product->id]));
             default:
