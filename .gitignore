@@ -6,5 +6,7 @@
 
 src/conf/conf.ini
 
+.htaccess
+
 .phpdoc/
 composer.lock
