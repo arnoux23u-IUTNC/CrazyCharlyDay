@@ -48,7 +48,7 @@ class ProduitView extends View
         return !$min ? <<<HTML
             <div class="card">
                 <div class="card-body">
-                    <div class="block">
+                    <div class="card-body-block">
                         <h1>{$this->product['titre']}</h1>
                         <p><b>Description</b> : {$this->product['description']}</p>
                         <p><b>Categorie</b> : {$this->product['categorie']}</p>
@@ -80,14 +80,16 @@ class ProduitView extends View
     {
         $html = <<<HTML
         <div class="card">
-            <div class="card-body">
-                <div class="block">
+           <div class="card-body">
+                <div class="card-body-block">
                     <h1>{$this->product['titre']}</h1>
                     <p><b>Description</b> : {$this->product['description']}</p>
                     <p><b>Categorie</b> : {$this->product['categorie']}</p>
                     <p><b>Poids</b> : {$this->product['poids']} kg</p>
+                    <div class="blockimg">
+                        <img src="/assets/images/produits/{$this->product['id']}.jpg" alt="{$this->product['description']}">
+                    </div>
                 </div>
-                <img src="/assets/images/produits/{$this->product['id']}.jpg" alt="{$this->product['description']}">
             </div>
         </div>
     </body>

@@ -3,13 +3,21 @@
     background-color: #FFF;
     display:grid;
     grid-template-columns: repeat(3, 1fr);
-    
-}
+    transform : scale(0.5);
+    margin: 20px;
 
+}
+.container-grid{
+    min-height: 0;
+    min-width: 0;
+    overflow: hidden;
+}
 .card{
     background-color: #93C8C4;
     border-radius:20px;
     margin: 30px;
+    min-height: 1000px;
+    min-width:1000px;
     width: auto;
 }
 
@@ -18,20 +26,23 @@
     background-color: #FFF;
     border-radius:20px;
     margin: 10px;
-    display: inline-flex;
-    height: 600px;
+    display: inline-block;
+    height: 950px;
+    max-height: 950px;
+    min-width:550px;
     width: 95%;
 }
 
-.block{
+.card-body-block{
     margin-right: 20px;
     margin-left: 20px;
-    width: 400px;
 }
 
 img{
     border-radius:20px;
     margin-right: -120px;
+    max-width: 50%;
+    max-height: 50%;
 }
 
 h1{
