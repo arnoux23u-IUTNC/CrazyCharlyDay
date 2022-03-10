@@ -25,6 +25,7 @@ class ProductView extends View
         return match ($method) {
             Renderer::SHOW_ALL => $this->all(),
             Renderer::SHOW_IN_LIST => $this->forList(),
+            Renderer::CREATE => $this->create(),
             default => parent::render($method, $access_level),
         };
     }
@@ -83,5 +84,34 @@ class ProductView extends View
         </html>
         HTML;
         return genererHeader("Produits") . $html;
+    }
+
+    protected function create(): string
+    {
+        $url = $this->container->router->pathFor('creerProduit');
+        $html = <<<HTML
+            <form action='$url' method='POST'>
+			    <h2>Creer un nouveau produit</h2>
+			    			    
+			    <label>Nom du produit</label>
+			    <input type='text' name='name' placeholder='Ex: Gel Douche' required><br>
+			    
+			    <label>Entrez une description</label>
+			    <input type='text' name='desc' placeholder='Sert à se laver' required><br>
+			
+			
+			    <label>Choisissez une catégorie</label>
+			    <input type='number' name='categ' value="0" min="0" step="1"  required><br>
+			
+			    <label>Entrez un poids</label>
+			    <input type='number' name='poids' value="0"  min="0" step="0.01" required><br>
+			
+			    <button type='submit' name='submit' value='create'>Creer Item</button>
+			</form>
+        </body>
+        </html>
+HTML;
+
+        return genererHeader("Creer") . $html;
     }
 }

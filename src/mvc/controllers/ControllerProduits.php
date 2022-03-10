@@ -8,7 +8,7 @@ use custombox\mvc\Renderer;
 use custombox\mvc\views\ProductView;
 use Slim\Container;
 use Slim\Http\{Response, Request};
-use Slim\Exception\{NotFoundException};
+use Slim\Exception\{MethodNotAllowedException, NotFoundException};
 
 class ControllerProduits
 {
@@ -49,5 +49,26 @@ class ControllerProduits
         return $this->response->write($this->renderer->render(Renderer::SHOW_ALL));
     }
 
+    public function create(): Response
+    {
+        switch ($this->request->getMethod()){
+            case 'GET':
+                return $this->response->write($this->renderer->render(Renderer::CREATE));
+            case 'POST':
+                $nom = filter_var($this->request->getParsedBodyParam('name'), FILTER_SANITIZE_STRING);;
+                $description = filter_var($this->request->getParsedBodyParam('desc'), FILTER_SANITIZE_STRING);;
+                $categorie = filter_var($this->request->getParsedBodyParam('categ'), FILTER_SANITIZE_STRING);
+                $poids= filter_var($this->request->getParsedBodyParam('poids'),FILTER_SANITIZE_NUMBER_FLOAT,FILTER_FLAG_ALLOW_FRACTION);;
+                $product = new Produit();
+                $product->titre = $nom;
+                $product->description = $description;
+                $product->categorie = $categorie;
+                $product->poids = $poids;
+                $product->save();
+                return $this->response->withRedirect($this->container->router->pathFor('afficherProduits'));
+            default :
+                throw new MethodNotAllowedException($this->request,$this->response,['GET','POST']);
+        }
+    }
 
 }

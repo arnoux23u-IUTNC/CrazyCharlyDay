@@ -8,6 +8,7 @@ abstract class Renderer
     const SHOW = 0;
     const SHOW_IN_LIST = 1;
     const SHOW_ALL = 2;
+    const CREATE = 3;
     const HOME_HOME = 5;
 
     const OTHER_MODE = 10;

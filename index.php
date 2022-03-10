@@ -39,10 +39,15 @@ $app->get('/produits/{id:[0-9]+}', function ($request, $response, $args) {
 })->setName('afficherProduit');
 $app->get('/produits[/]', function ($request, $response, $args) {
     return (new ControllerProduits($this, $request, $response, $args))->displayAll();
-})->setName('afficherProduit');
+})->setName('afficherProduits');
 $app->get('/', function ($request, $response) {
     return (new ControllerUser($this, $request, $response, []))->home();
 })->setName('home');
+
+$app->any('/produits/create[/]', function ($request, $response) {
+    return (new ControllerProduits($this, $request, $response, []))->create();
+})->setName('creerProduit');
+
 
 #Demmarage de l'application
 try {
