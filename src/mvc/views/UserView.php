@@ -100,7 +100,7 @@ class UserView extends View
     {
         $popup = match (filter_var($this->request->getQueryParam('info'), FILTER_SANITIZE_STRING) ?? "") {
             "invalid" => "<div class='popup warning'>Formulaire invalide</div>",
-            "password" => "<div class='popup warning'>Mot de passe invalide</div>",
+            "password" => "<div class='popup warning'>Mot de passe ne correspondent pas</div>",
             default => ""
         };
         $html = <<<HTML

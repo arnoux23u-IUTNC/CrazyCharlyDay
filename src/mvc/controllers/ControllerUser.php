@@ -161,6 +161,8 @@ class ControllerUser
                     return $this->response->withRedirect($this->container['router']->pathFor('accounts', ["action" => 'register'], ["info" => "invalid"]));
                 if (!Validator::validatePassword($password, $password_confirm))
                     return $this->response->withRedirect($this->container['router']->pathFor('accounts', ["action" => 'register'], ["info" => "password"]));
+                if(!empty(User::where('username','LIKE',$username)->first()))
+                    return $this->response->withRedirect($this->container['router']->pathFor('accounts', ["action" => 'register'], ["info" => "username"]));
                 $user = new User();
                 $user['user_id'] = NULL;
                 $user['username'] = $username;
