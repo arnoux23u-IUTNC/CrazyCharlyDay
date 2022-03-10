@@ -63,7 +63,7 @@ function genererHeader(string $title, array $styles = []): string
     <html lang="fr">
     <head>
         <meta charset='UTF-8'>
-        <link rel="icon" href="/www/arnoux23u/crazycharlyday/assets/images/logos/favico.png">
+        <link rel="icon" href="https://webetu.iutnc.univ-lorraine.fr/www/arnoux23u/crazycharlyday/assets/images/logos/favico.png">
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
         <meta name="description" content="CrazyCharlyDay || CustomBox - Atelier 17.91">
         <meta property="og:title" content="CustomBox - Atelier 17.91" />
