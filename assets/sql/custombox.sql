@@ -1,76 +1,33 @@
--- phpMyAdmin SQL Dump
--- version 5.1.1
--- https://www.phpmyadmin.net/
---
--- Hôte : 127.0.0.1
--- Généré le : mar. 08 mars 2022 à 18:24
--- Version du serveur : 10.4.21-MariaDB
--- Version de PHP : 8.0.10
-
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
 SET time_zone = "+00:00";
 
+USE `USERNAME`;
 
-/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
-/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
-/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
-/*!40101 SET NAMES utf8mb4 */;
-
---
--- Base de données : `custombox`
---
-
--- --------------------------------------------------------
-
---
--- Structure de la table `boite`
---
-
-CREATE TABLE `boite` (
+CREATE TABLE `ccd_boite` (
   `id` int(11) NOT NULL,
   `taille` text NOT NULL,
   `poidsmax` float NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
---
--- Déchargement des données de la table `boite`
---
-
-INSERT INTO `boite` (`id`, `taille`, `poidsmax`) VALUES
+INSERT INTO `ccd_boite` (`id`, `taille`, `poidsmax`) VALUES
 (1, 'petite', 0.7),
 (2, 'moyenne', 1.5),
 (3, 'grande', 3.2);
 
--- --------------------------------------------------------
-
---
--- Structure de la table `categorie`
---
-
-CREATE TABLE `categorie` (
+CREATE TABLE `ccd_categorie` (
   `id` int(11) NOT NULL,
   `nom` text NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
---
--- Déchargement des données de la table `categorie`
---
-
-INSERT INTO `categorie` (`id`, `nom`) VALUES
+INSERT INTO `ccd_categorie` (`id`, `nom`) VALUES
 (1, 'Beauté'),
 (2, 'Bijoux'),
 (3, 'Décoration'),
 (4, 'Produit ménager'),
 (5, 'Upcycling');
 
--- --------------------------------------------------------
-
---
--- Structure de la table `produit`
---
-
-CREATE TABLE `produit` (
+CREATE TABLE `ccd_produit` (
   `id` int(11) NOT NULL,
   `titre` text NOT NULL,
   `description` text NOT NULL,
@@ -78,11 +35,7 @@ CREATE TABLE `produit` (
   `poids` float NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
---
--- Déchargement des données de la table `produit`
---
-
-INSERT INTO `produit` (`id`, `titre`, `description`, `categorie`, `poids`) VALUES
+INSERT INTO `ccd_produit` (`id`, `titre`, `description`, `categorie`, `poids`) VALUES
 (1, 'Crème', 'Une crème hydratante et parfumée qui rend la peau douce', 1, 0.3),
 (2, 'Savon', 'Un savon qui respecte la peau', 1, 0.2),
 (3, 'Shampoing', 'Shampoing doux et démêlant', 1, 0.4),
@@ -97,62 +50,19 @@ INSERT INTO `produit` (`id`, `titre`, `description`, `categorie`, `poids`) VALUE
 (12, 'Surprise', 'Pochette surprise pour faire plaisir aux petits et grands', 5, 0.7),
 (13, 'T-shirt', 'T-shirt peint à la main et avec pochoir', 5, 0.32);
 
---
--- Index pour les tables déchargées
---
-
---
--- Index pour la table `boite`
---
-ALTER TABLE `boite`
+ALTER TABLE `ccd_boite`
   ADD PRIMARY KEY (`id`);
-
---
--- Index pour la table `categorie`
---
-ALTER TABLE `categorie`
+ALTER TABLE `ccd_categorie`
   ADD PRIMARY KEY (`id`);
-
---
--- Index pour la table `produit`
---
-ALTER TABLE `produit`
+ALTER TABLE `ccd_produit`
   ADD PRIMARY KEY (`id`),
   ADD KEY `categorie` (`categorie`);
-
---
--- AUTO_INCREMENT pour les tables déchargées
---
-
---
--- AUTO_INCREMENT pour la table `boite`
---
-ALTER TABLE `boite`
+ALTER TABLE `ccd_boite`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
-
---
--- AUTO_INCREMENT pour la table `categorie`
---
-ALTER TABLE `categorie`
+ALTER TABLE `ccd_categorie`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
-
---
--- AUTO_INCREMENT pour la table `produit`
---
-ALTER TABLE `produit`
+ALTER TABLE `ccd_produit`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
-
---
--- Contraintes pour les tables déchargées
---
-
---
--- Contraintes pour la table `produit`
---
-ALTER TABLE `produit`
-  ADD CONSTRAINT `produit_ibfk_1` FOREIGN KEY (`categorie`) REFERENCES `categorie` (`id`);
+ALTER TABLE `ccd_produit`
+  ADD CONSTRAINT `produit_ibfk_1` FOREIGN KEY (`categorie`) REFERENCES `ccd_categorie` (`id`);
 COMMIT;
-
-/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
-/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
-/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
