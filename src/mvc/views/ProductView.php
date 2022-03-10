@@ -92,7 +92,7 @@ class ProductView extends View
 
     protected function create(): string
     {
-        $url = $this->container->router->pathFor('creerProduit');
+        $url = $this->container['router']->pathFor('creerProduit');
         $categorie = Categorie::all();
         $categ = "";
         foreach ($categorie as $c) {

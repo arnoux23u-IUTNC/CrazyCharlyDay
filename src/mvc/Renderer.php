@@ -14,6 +14,7 @@ abstract class Renderer
     const REGISTER = 21;
 
 
+
     const OTHER_MODE = 10;
     const OWNER_MODE = 100;
     const ADMIN_MODE = 1000;

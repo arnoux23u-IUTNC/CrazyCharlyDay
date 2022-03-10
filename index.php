@@ -40,10 +40,20 @@ $app->any("/accounts/admin/{id:[0-9]+}", function ($request, $response, $args) {
 $app->any("/accounts/{action:login|profile|logout|register|delete}[/]", function ($request, $response, $args) {
     return (new ControllerUser($this, $request, $response, $args))->process();
 })->setName('accounts');
+$app->any("commandes/", function ($request, $response, $args) {
+    //TODO FAIRE
+    return (new ControllerCommande($this, $request, $response, $args))->list();
+})->setName('commandesList');
 $app->get("/users[/]", function ($request, $response, $args) {
     return (new ControllerUser($this, $request, $response, $args))->list();
 })->setName('usersList');
-$app->get('/produits/{id:[0-9]+}', function ($request, $response, $args) {
+$app->any('/produits/{id:[0-9]+}/edit[/]', function ($request, $response, $args) {
+    return (new ControllerProduits($this, $request, $response, $args))->edit();
+})->setName('modifierProduit');
+$app->any('/produits/create[/]', function ($request, $response) {
+    return (new ControllerProduits($this, $request, $response, []))->create();
+})->setName('creerProduit');
+$app->get('/produits/{id:[0-9]+}[/]', function ($request, $response, $args) {
     return (new ControllerProduits($this, $request, $response, $args))->display();
 })->setName('afficherProduit');
 $app->get('/produits[/]', function ($request, $response, $args) {
@@ -53,9 +63,7 @@ $app->get('/', function ($request, $response) {
     return (new ControllerUser($this, $request, $response, []))->home();
 })->setName('home');
 
-$app->any('/produits/create[/]', function ($request, $response) {
-    return (new ControllerProduits($this, $request, $response, []))->create();
-})->setName('creerProduit');
+
 
 
 #Demmarage de l'application
