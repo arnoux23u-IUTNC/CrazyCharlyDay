@@ -2,6 +2,13 @@
 
 namespace custombox\mvc\views;
 
+?>
+<style>
+<?php include 'modierProduit.css'; ?>
+</style>
+<div class="tableau">
+<?php
+
 use custombox\mvc\models\Boite;
 use custombox\mvc\Renderer;
 use custombox\mvc\View;
@@ -85,15 +92,21 @@ class BoiteView extends View
         $url = $this->container->router->pathFor('creerBoite');
         $html = <<<HTML
             <form action='$url' method='POST'>
-			    <h2>Creer une nouvelle boite</h2>
-			    			    
-			    <label>Taille de la boite</label>
-			    <input type='text' name='taille' placeholder='Ex: Géant' required><br>
-			    <label>Entrez un poids</label>
-			    <input type='number' name='poids' value="0"  min="0" step="0.01" required><br>
-			
-			    <button type='submit' name='submit' value='create'>Creer Boite</button>
-			</form>
+                <div class="modifieur">
+                    <p>Modifier le produit</p>
+                    <label>Nom du produit</label>
+                    <input type='text' name='name' placeholder='' value="{$this->product['titre']}" required><br><br>
+                    <label>Entrez une description</label>
+                    <input type='text' name='desc' placeholder='' value="{$this->product['description']}" required><br><br>
+                    <label>Selectionnez une catégorie</label>
+                    <select name="categ">
+                    $categ
+                    </select><br><br>
+                    <label>Entrez un poids</label>
+                    <input type='number' name='poids' value="{$this->product['poids']}"  min="0" step="0.01" required><br><br>
+                    <button type='submit' name='submit' value='create'>Modifier Item</button>
+                </div>
+            </form>
         </body>
         </html>
 HTML;

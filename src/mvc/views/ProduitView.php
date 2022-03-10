@@ -37,6 +37,7 @@ class ProduitView extends View
         return match ($method) {
             Renderer::EDIT => $this->edit(),
             Renderer::SHOW_ALL => $this->all(),
+            Renderer::SHOW_IN_LIST => $this->forList(),
             Renderer::SHOW_IN_LIST_MIN => $this->forList(true),
             Renderer::CREATE => $this->create(),
             default => parent::render($method, $access_level),

@@ -8,6 +8,7 @@ use custombox\mvc\models\Produit;
 use custombox\mvc\models\User;
 use custombox\mvc\Renderer;
 use custombox\mvc\View;
+use custombox\QRGenerator;
 use JetBrains\PhpStorm\Pure;
 use Slim\Container;
 use Slim\Http\Request;
@@ -34,10 +35,10 @@ class CommandeView extends View
         return $html;
     }
 
-    protected function show():string
+    protected function show($b = false): string
     {
         $products = "";
-        foreach($this->command->produits as $produit){
+        foreach ($this->command->produits as $produit) {
             $products .= <<<HTML
                 <tr>
                     <th scope="row">{$produit['titre']}</th>
@@ -45,7 +46,8 @@ class CommandeView extends View
                 </tr>
             HTML;
         }
-        return genererHeader("Commande {$this->command['id']}").<<<HTML
+        $qr = !$b ? QRGenerator::generateQRCODE((string)$this->request->getUri()) : "";
+        $html = <<<HTML
             <div class="container">
                 <div class="row">
                     <div class="col-md-12">
@@ -76,9 +78,13 @@ class CommandeView extends View
                     <p style="background-color: {$this->command->couleur_boite}" >couleur boite</p>
                 </div>
             </div>
+            <div>
+                $qr
+            </div>
         </body>     
         </html>
         HTML;
+        return !$b ? genererHeader("Commande {$this->command['id']}") . $html : $html;
     }
 
     /**
@@ -90,7 +96,7 @@ class CommandeView extends View
         foreach (Produit::all() as $product) {
             $productsHtml .= (new ProduitView($this->container, $product, $this->request))->render(Renderer::SHOW_IN_LIST_MIN);
         }
-        return genererHeader("Création de commande",["commande.css"]) . <<<HTML
+        return genererHeader("Création de commande", ["commande.css"]) . <<<HTML
             <form method="POST" action="{$this->container['router']->pathFor('creerCommande')}">
                 <h1>Créer une commande</h1>
                 <div style="display: grid; grid-template-columns: repeat(3, 1fr);">
@@ -103,12 +109,13 @@ class CommandeView extends View
         HTML;
     }
 
-    public function all(): string {
-        $html ='';
-        foreach (Commande::all() as $commande){
-            $html .= (new CommandeView($this->container,$commande, $this->request))->render(Renderer::SHOW);
+    public function all(): string
+    {
+        $html = '';
+        foreach (Commande::all() as $commande) {
+            $html .= (new CommandeView($this->container, $commande, $this->request))->render(Renderer::SHOW_IN_LIST_MIN);
         }
-        return genererHeader("Liste des Commandes"). <<<HTML
+        return genererHeader("Liste des Commandes") . <<<HTML
             <div>
                 <h1>Liste des Commandes</h1>
                 $html
@@ -125,6 +132,7 @@ class CommandeView extends View
         return match ($method) {
             Renderer::CREATE => $this->create(),
             Renderer::SHOW_ALL => $this->all(),
+            Renderer::SHOW_IN_LIST_MIN => $this->show(true),
             default => parent::render($method, $access_level),
         };
     }
