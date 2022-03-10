@@ -11,7 +11,7 @@ use JetBrains\PhpStorm\Pure;
 use Slim\Container;
 use Slim\Http\Request;
 
-class ProductView extends View
+class ProduitView extends View
 {
 
     private ?Produit $product;
@@ -78,7 +78,7 @@ class ProductView extends View
     {
         $products = "";
         foreach (Produit::all() as $product) {
-            $products .= (new ProductView($this->container, $product, $this->request))->render(Renderer::SHOW_IN_LIST);
+            $products .= (new ProduitView($this->container, $product, $this->request))->render(Renderer::SHOW_IN_LIST);
         }
         $html = <<<HTML
             <div class="container">
@@ -92,7 +92,7 @@ class ProductView extends View
 
     protected function create(): string
     {
-        $url = $this->container->router->pathFor('creerProduit');
+        $url = $this->container['router']->pathFor('creerProduit');
         $categorie = Categorie::all();
         $categ = "";
         foreach ($categorie as $c) {

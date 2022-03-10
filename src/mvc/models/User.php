@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 /**
  * @method static where(string $string, string $string1, mixed $user_id)
+ * @method static find(mixed $param)
  */
 class User extends Model
 {
