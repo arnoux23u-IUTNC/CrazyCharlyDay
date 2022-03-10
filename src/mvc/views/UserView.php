@@ -112,10 +112,10 @@ class UserView extends View
                     <input type="text" id="username" name="username" class="form-control form-control-alternative" required autofocus>
                     <label class="form-control-label" for="lastname">Nom de famille</label>
                     <input type="text" id="lastname" name="lastname" class="form-control form-control-alternative" required>
-                    <label class="form-control-label" for="firstname">Prénom</label>
-                    <input type="text" id="phone" name="phone" class="form-control form-control-alternative" required>
-                    <label class="form-control-label" for="phone">Téléphone</label>
+                    <label class="form-control-label" for="phone">Prénom</label>
                     <input type="text" id="firstname" name="firstname" class="form-control form-control-alternative" required>
+                    <label class="form-control-label" for="firstname">Téléphone</label>
+                    <input type="text" id="phone" name="phone" class="form-control form-control-alternative" required>
                     <label class="form-control-label" for="email">Email</label>
                     <input type="email" id="email" name="email" class="form-control form-control-alternative" required>
                     <label class="form-control-label" for="input-new-password">Mot de passe</label>
