@@ -1,0 +1,195 @@
+body {
+    margin: 0;
+}
+
+.banner-left {
+    display: inline-flex;
+}
+
+.banner-left .menu {
+    margin-left: 27px;
+    margin-top: 15px;
+    margin-bottom: 18px;
+    text-decoration: none;
+    color: #402222;
+    font-family: "Open Sans", Aileron-Bold, sans-serif;
+    transition: 500ms;
+}
+
+.banner-left .menu:hover {
+    color: #E77441;
+    transition: 500ms;
+}
+
+.companyLogo {
+    margin-left: 30px;
+    margin-right: 87px;
+    width: 50px;
+}
+
+header section {
+    padding-top: 10px;
+    padding-bottom: 10px;
+    width: 100%;
+    background-color: #93C8C4;
+
+}
+
+header {
+    display: flex;
+}
+
+.banner-right {
+    /* padding-top: 13px; */
+    padding-top: 22px;
+    justify-items: right;
+
+    top: 100%;
+    right: 0;
+    width: 10%;
+
+}
+
+.banner-right a {
+    margin-left: 20px;
+}
+
+.banner-right .cart {
+    margin-right: 20px;
+}
+
+/************* CONTENU PAGE PART *************/
+
+.contenu p {
+    font-family: "Open Sans", Aileron-Regular, sans-serif;
+}
+
+.contenu h1 {
+    font-size: 32px;
+    font-family: "Open Sans", Aileron-Bold, sans-serif;
+}
+
+.title {
+    font-family: "Open Sans", Aileron-Bold, sans-serif;
+}
+
+.beneTitle {
+    font-family: "Open Sans", Benedict, sans-serif;
+}
+
+.createBox {
+    text-decoration: none;
+    transition: 500ms;
+}
+
+.createBox:hover{
+    background-color: #E77441;
+    transition: 500ms;
+}
+
+.notionDivIMG {
+    height: 700px;
+
+}
+
+.missionPicture {
+    width: 464px;
+}
+
+.contenu :not(.notionContenu,.textcontainer) {
+}
+
+/*
+.textcontainer {
+    display: block;
+}
+
+
+.notionContenu {
+    background-color: green;
+    width: 518px;
+    display: block;
+}
+ */
+
+
+.parag1 p {
+    font-size: 20px;
+}
+
+.parag2 p {
+    font-size: 20px;
+}
+
+/** GRID LAYOUT **/
+
+.contenu {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-gap: 0;
+    grid-auto-rows: minmax(100px, auto);
+}
+
+.notionContenu {
+    grid-column: 1;
+    grid-row: 1/5;
+    margin-left: 20px;
+}
+
+.parag1 {
+    padding-top: 90px;
+    grid-column: 2 / 4;
+    grid-row: 1;
+    margin-left: -100px;
+    text-align: justify;
+    margin-right: 10px;
+}
+
+.parag2 {
+    grid-column: 2;
+    grid-row: 2;
+    margin-left: -100px;
+    text-align: justify;
+
+}
+
+.parag3 {
+    grid-column: 3;
+    grid-row: 2;
+    text-align: justify;
+}
+
+/** GRID LAYOUT END **/
+
+.createBox {
+    padding: 10px 10px 10px 10px;
+    border-radius: 5px;
+    font-family: "Open Sans", Aileron-Bold, sans-serif;
+    font-weight: bolder;
+    background-color: #93C8C4;
+    color: #373737;
+}
+
+/*** FOOTER ***/
+
+.footer {
+    position: fixed;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    background-color: #373737;
+    color: white;
+    text-align: center;
+    font-family: "Open Sans", Aileron-Bold, sans-serif;
+}
+/************* CONTENU PAGE END *************/
+
+/* font family */
+
+@font-face {
+    font-family: "Open Sans";
+    src: url("/fonts/Aileron-Bold.otf") format("otf"),
+    url("/fonts/Aileron-Regular.otf") format("otf"),
+    url("/fonts/Benedict.otf") format("otf"),
+    url("/fonts/bright-regular-1.ttf") format("ttf");
+}
