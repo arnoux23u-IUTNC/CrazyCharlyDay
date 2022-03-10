@@ -3,6 +3,7 @@
 namespace custombox\mvc\views;
 
 use custombox\exceptions\ForbiddenException;
+use custombox\mvc\models\Categorie;
 use custombox\mvc\models\Produit;
 use custombox\mvc\Renderer;
 use custombox\mvc\View;
@@ -92,6 +93,11 @@ class ProductView extends View
     protected function create(): string
     {
         $url = $this->container->router->pathFor('creerProduit');
+        $categorie = Categorie::all();
+        $categ = "";
+        foreach ($categorie as $c){
+            $categ .= "<option value=" . $c['id'] . ">" .$c['nom'] ."</option><br>";
+        }
         $html = <<<HTML
             <form action='$url' method='POST'>
 			    <h2>Creer un nouveau produit</h2>
@@ -102,9 +108,10 @@ class ProductView extends View
 			    <label>Entrez une description</label>
 			    <input type='text' name='desc' placeholder='Sert à se laver' required><br>
 			
-			
-			    <label>Choisissez une catégorie</label>
-			    <input type='number' name='categ' value="0" min="0" step="1"  required><br>
+			    <label>Selectionnez une catégorie</label>
+			    <select name="categ">
+			    $categ
+			    </select><br>
 			
 			    <label>Entrez un poids</label>
 			    <input type='number' name='poids' value="0"  min="0" step="0.01" required><br>
