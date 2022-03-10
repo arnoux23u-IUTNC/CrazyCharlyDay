@@ -2,6 +2,13 @@
 
 namespace custombox\mvc\views;
 
+?>
+<style>
+<?php include 'main.css'; ?>
+</style>
+<div class="tableau">
+<?php
+
 use custombox\exceptions\ForbiddenException;
 use custombox\mvc\models\Categorie;
 use custombox\mvc\models\Produit;
@@ -37,11 +44,12 @@ class ProduitView extends View
         return <<<HTML
             <div class="card">
                 <div class="card-body">
-                    <h1>{$this->product['id']}</h1>
-                    <p>{$this->product['titre']}</p>
-                    <p>{$this->product['description']}</p>
-                    <p>{$this->product['categorie']}</p>
-                    <p>{$this->product['poids']}</p>
+                    <div class="block">
+                        <h1>{$this->product['titre']}</h1>
+                        <p><b>Description</b> : {$this->product['description']}</p>
+                        <p><b>Categorie</b> : {$this->product['categorie']}</p>
+                        <p><b>Poids</b> : {$this->product['poids']} kg</p>
+                    </div>
                     <img src="/assets/images/produits/{$this->product['id']}.jpg" alt="{$this->product['description']}">
                 </div>
             </div>
@@ -53,21 +61,20 @@ class ProduitView extends View
     protected function show(): string
     {
         $html = <<<HTML
-            <div class="container">
-                <div class="row">
-                    <div class="col-md-12">
-                        <h1>{$this->product['id']}</h1>
-                        <p>{$this->product['titre']}</p>
-                        <p>{$this->product['description']}</p>
-                        <p>{$this->product['categorie']}</p>
-                        <p>{$this->product['poids']}</p>
-                        <img src="/assets/images/produits/{$this->product['id']}.jpg" alt="{$this->product['description']}">
-                    </div>
+        <div class="card">
+            <div class="card-body">
+                <div class="block">
+                    <h1>{$this->product['titre']}</h1>
+                    <p><b>Description</b> : {$this->product['description']}</p>
+                    <p><b>Categorie</b> : {$this->product['categorie']}</p>
+                    <p><b>Poids</b> : {$this->product['poids']} kg</p>
                 </div>
+                <img src="/assets/images/produits/{$this->product['id']}.jpg" alt="{$this->product['description']}">
             </div>
-        </body>
-        </html>
-        HTML;
+        </div>
+    </body>
+    </html>
+    HTML;
         return genererHeader("{$this->product['titre']}") . $html;
     }
 
@@ -123,3 +130,6 @@ class ProduitView extends View
         return genererHeader("Creer") . $html;
     }
 }
+?>
+</div>
+<?php

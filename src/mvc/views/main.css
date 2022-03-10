@@ -1,0 +1,45 @@
+
+.container{
+    background-color: #FFF;
+    display:grid;
+    grid-template-columns: repeat(3, 1fr);
+    
+}
+
+.card{
+    background-color: #93C8C4;
+    border-radius:20px;
+    margin: 30px;
+    width: auto;
+}
+
+.card-body{
+    padding: 1em;
+    background-color: #FFF;
+    border-radius:20px;
+    margin: 10px;
+    display: inline-flex;
+    height: 600px;
+    width: 95%;
+}
+
+.block{
+    margin-right: 20px;
+    margin-left: 20px;
+    width: 400px;
+}
+
+img{
+    border-radius:20px;
+    margin-right: -120px;
+}
+
+h1{
+    font-family: "Bright";
+    font-size: 6em;
+}
+
+p{
+    font-family: "Aileron";
+    font-size: 2em;
+}
