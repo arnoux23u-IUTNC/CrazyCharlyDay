@@ -1,9 +1,12 @@
 <?php
 
-namespace custombox\models;
+    namespace custombox\mvc\models;
 
 use Illuminate\Database\Eloquent\Model;
 
+/**
+ * @method static where(string $string, string $string1, mixed $filter_var)
+ */
 class Produit extends Model
 {
 
@@ -14,7 +17,7 @@ class Produit extends Model
 
     public function categorie()
     {
-        return $this->belongsTo('custombox\models\Categorie', 'id_categorie');
+        return $this->belongsTo('custombox\mvc\models\Categorie', 'id_categorie');
     }
     public function commandes(){
         return $this->belongsToMany('custombox\models\Commande', 'ccd_contenucommande', 'id_produit', 'id_commande');

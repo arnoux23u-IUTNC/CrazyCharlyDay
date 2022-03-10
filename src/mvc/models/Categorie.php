@@ -1,6 +1,6 @@
 <?php
 
-namespace custombox\models;
+namespace custombox\mvc\models;
 
 use Illuminate\Database\Eloquent\Model;
 
@@ -14,7 +14,7 @@ class Categorie extends Model
 
     public function produits()
     {
-        return $this->hasMany('custombox\models\Produit', 'id_categorie');
+        return $this->hasMany('custombox\mvc\models\Produit', 'id_categorie');
     }
 
 }

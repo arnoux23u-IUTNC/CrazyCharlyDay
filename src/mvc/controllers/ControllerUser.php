@@ -22,7 +22,7 @@ class ControllerUser
     #[Pure] public function __construct(Container $c, Request $request, Response $response, array $args)
     {
         $this->container = $c;
-        $this->renderer = new UserView($this->container, $request);
+        $this->renderer = new UserView($this->container,  $request);
         $this->request = $request;
         $this->response = $response;
         $this->args = $args;

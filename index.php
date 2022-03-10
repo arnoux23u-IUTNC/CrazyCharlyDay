@@ -6,7 +6,7 @@ require_once __DIR__ . DIRECTORY_SEPARATOR . 'vendor' . DIRECTORY_SEPARATOR . 'a
 use Slim\{App, Container};
 use custombox\db\Eloquent;
 use custombox\exceptions\ExceptionHandler;
-use custombox\mvc\controllers\ControllerUser;
+use custombox\mvc\controllers\{ControllerUser, ControllerProduits};
 
 #Container
 $container = new Container();
@@ -34,8 +34,12 @@ Eloquent::start('src' . DIRECTORY_SEPARATOR . 'conf' . DIRECTORY_SEPARATOR . 'co
 $app = new App($container);
 
 #Redirection du traffic dans l'application
-//Utilisateurs
-
+$app->get('/produits/{id:[0-9]+}', function ($request, $response, $args) {
+    return (new ControllerProduits($this, $request, $response, $args))->display();
+})->setName('afficherProduit');
+$app->get('/produits[/]', function ($request, $response, $args) {
+    return (new ControllerProduits($this, $request, $response, $args))->displayAll();
+})->setName('afficherProduit');
 $app->get('/', function ($request, $response) {
     return (new ControllerUser($this, $request, $response, []))->home();
 })->setName('home');

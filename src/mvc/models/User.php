@@ -1,6 +1,6 @@
 <?php
 
-namespace custombox\models;
+namespace custombox\mvc\models;
 
 use Illuminate\Database\Eloquent\Model;
 
