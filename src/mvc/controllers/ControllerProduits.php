@@ -65,7 +65,7 @@ class ControllerProduits
                 $product->categorie = $categorie;
                 $product->poids = $poids;
                 $product->save();
-                return $this->response->withRedirect($this->container->router->pathFor('afficherProduits'));
+                return $this->response->withRedirect($this->container['router']->pathFor('afficherProduits'));
             default :
                 throw new MethodNotAllowedException($this->request,$this->response,['GET','POST']);
         }

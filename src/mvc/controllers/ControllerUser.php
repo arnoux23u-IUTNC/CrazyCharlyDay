@@ -110,6 +110,10 @@ class ControllerUser
                     $toUpdate["lastname"] = filter_var($this->request->getParsedBodyParam("input-last-name"), FILTER_SANITIZE_STRING);
                     $i++;
                 }
+                if ($this->request->getParsedBodyParam("input-phone") !== $this->user->phone) {
+                    $toUpdate["phone"] = filter_var($this->request->getParsedBodyParam("input-phone"), FILTER_SANITIZE_STRING);
+                    $i++;
+                }
                 if (Validator::validatePassword($this->request->getParsedBodyParam("input-new-password"), $this->request->getParsedBodyParam("input-new-password-c"))) {
                     $pwd = filter_var($this->request->getParsedBodyParam("input-new-password"), FILTER_SANITIZE_STRING);
                     if (password_verify($pwd, $this->user->password))

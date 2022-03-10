@@ -32,9 +32,38 @@ class UserView extends View
     }
 
 
-    protected function show(): string
+    #[Pure] protected function show(): string
     {
-        return genererHeader("Profil", [])."Bienvenue ".$this->user['username']."<br><a href='{$this->container['router']->pathFor('accounts', ['action' => 'logout'])}'>Se déconnecter</a>";
+        $html = genererHeader("Profil", ["profile.css"]) . file_get_contents(__DIR__ . DIRECTORY_SEPARATOR . '..' . DIRECTORY_SEPARATOR . '..' . DIRECTORY_SEPARATOR . 'content' . DIRECTORY_SEPARATOR . 'profile.phtml');
+        $user = $this->user;
+        $phtmlVars = array(
+            "main_route" => $this->container['router']->pathFor('home'),
+            "profile_route" => $this->container['router']->pathFor('accounts', ["action" => 'profile']),
+            "logout_route" => $this->container['router']->pathFor('accounts', ["action" => 'logout']),
+            "delete_account_route" => $this->container['router']->pathFor('accounts', ["action" => 'delete']),
+            "user_username" => $user['username'],
+            "user_firstname" => $user['firstname'],
+            "user_lastname" => $user['lastname'],
+            "user_email" => $user['mail'],
+            "user_phone" => $user['phone'],
+            "user_created_at" => $user['created_at'],
+            "user_updated_at" => $user['updated'] ?? "Jamais",
+            "user_lastlogged_at" => $user['last_login'],
+            "user_lastlogged_ip" => $user['last_ip'],
+            "info_msg" => match (filter_var($this->request->getQueryParam('info'), FILTER_SANITIZE_STRING) ?? "") {
+                "password" => "<div class='popup warning fit'><span style='color:black;'>Mot de passe incorrect</span></div>",
+                "no-change" => "<div class='popup warning fit'><span style='color:black;'>Aucun changement apporté</span></div>",
+                "equals" => "<div class='popup warning fit'><span style='color:black;'>Mot de passe identique à l'ancien.</span></div>",
+                "success" => "<div class='popup fit'><span style='color:black;'>Profil mis à jour</span></div>",
+                "ok" => "<div class='popup fit'><span style='color:black;'>{$this->container->lang['image_saved']}</div>",
+                "error" => "<div class='popup warning fit'><span style='color:black;'>{$this->container->lang['image_error']}</span></div>",
+                default => ""
+            },
+        );
+        foreach ($phtmlVars as $key => $value) {
+            $html = str_replace("%" . $key . "%", $value, $html);
+        }
+        return $html;
     }
 
     private function login(): string

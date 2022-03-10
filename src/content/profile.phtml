@@ -1,0 +1,120 @@
+    <div class="main-content">
+        <div class="header pb-8 pt-5 pt-lg-8 d-flex align-items-center" style="min-height: 300px;  background-size: cover; background-position: center top;">
+            <span class="mask bg-gradient-default opacity-8"></span>
+            <div class="container-fluid align-items-center">
+                <div class="row">
+                    <div class="col-lg-7 col-md-10">
+                        <h1 class="display-2 text-white">Bonjour %user_firstname%</h1>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="container-fluid mt--7">
+            <div class="row">
+                <div class="col-xl-4 order-xl-2 mb-5 mb-xl-0">
+                    <div class="row-2">
+                        <form method="post" class="fw" id="upload_form" enctype="multipart/form-data" action="%profile_route%">
+                            <div class="card card-profile shadow">
+                                <div class="card-body pt-0 pt-md-4">%info_msg%
+                                    <div class="text-center">
+                                        <h3>%user_lastname% %user_firstname%</h3>
+                                        <p class="userinfo">Crée le %user_created_at%</p>
+                                        <p class="userinfo">Dernière mise à jour : %user_updated_at%</p>
+                                        <p class="userinfo">Dernière connexion : %user_lastlogged_at% [%user_lastlogged_ip%]</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+                <!--VueListe ici -->
+                <div class="col-xl-8 order-xl-1">
+                    <form onsubmit="return matchPwd()" method="post" action="%profile_route%">
+                        <div class="card bg-secondary shadow">
+                            <div class="card-header bg-white border-0">
+                                <div class="row align-items-center">
+                                    <div class="col-8">
+                                        <h3 class="mb-0">Vos informations</h3>
+                                    </div>
+                                    <div class="col-4 text-right">
+                                        <a href="%logout_route%" class="btn btn-sm btn-danger btn-danger-fr">Déconnexion</a>
+                                        <button type="submit" class="btn btn-sm btn-primary">Enregistrer</button>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="card-body">
+                                <h6 class="heading-small text-muted mb-4">Utilisateur</h6>
+                                <div class="pl-lg-4">
+                                    <div class="row">
+                                        <div class="col-lg-6">
+                                            <div class="form-group focused">
+                                                <label class="form-control-label" for="input-username">Nom d'utilisateur</label>
+                                                <input type="text" id="input-username" autocomplete="off" name="input-username" disabled class="form-control form-control-alternative" placeholder="Nom d'utilisateur" value="%user_username%">
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-6">
+                                            <div class="form-group">
+                                                <label class="form-control-label" for="input-email">Email</label>
+                                                <input type="email" id="input-email" autocomplete="email" name="input-email" class="form-control form-control-alternative" value="%user_email%">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-lg-6">
+                                            <div class="form-group focused">
+                                                <label class="form-control-label" for="input-last-name">Nom de famille</label>
+                                                <input type="text" id="input-last-name" autocomplete="family-name" name="input-last-name" class="form-control form-control-alternative" placeholder="Nom de famille" value="%user_lastname%">
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-6">
+                                            <div class="form-group focused">
+                                                <label class="form-control-label" for="input-first-name">Prénom</label>
+                                                <input type="text" id="input-first-name" name="input-first-name" autocomplete="given-name" class="form-control form-control-alternative" placeholder="Prénom" value="%user_firstname%">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-lg-6">
+                                            <div class="form-group focused">
+                                                <label class="form-control-label" for="input-last-name">Téléphone</label>
+                                                <input type="text" id="input-last-name" autocomplete="tel" name="input-phone" class="form-control form-control-alternative" placeholder="Téléphone" value="%user_phone%">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <hr class="my-4">
+                                <h6 class="heading-small text-muted mb-4">Sécurité</h6>
+                                <div class="pl-lg-4">
+                                    <div class="row">
+                                        <div class="col-lg-4">
+                                            <div class="form-group focused">
+                                                <label class="form-control-label" for="input-old-password">Ancien mot de passe</label>
+                                                <div class='pfield'><input type="password" id="input-old-password" name="input-old-password" autocomplete="current-password" class="form-control form-control-alternative" required placeholder="Requis"><i data-associated="input-old-password" class="pwdicon far fa-eye"></i></div>
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-4">
+                                            <div class="form-group focused">
+                                                <label class="form-control-label" for="input-new-password">Nouveau mot de passe</label>
+                                                <div class="pfield"><input type="password" id="input-new-password" minlength="14" maxlength="40" pattern="(?=.*\d)(?=.*[a-z])(?=.*[~!@#$%^&*()\-_=+[\]{};:,<>\/?|])(?=.*[A-Z]).{14,}" name="input-new-password" autocomplete="new-password" class="form-control form-control-alternative"><i data-associated="input-new-password" class="pwdicon far fa-eye"></i></div>
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-4">
+                                            <div class="form-group focused">
+                                                <label class="form-control-label" for="input-new-password-c">Confirmation</label>
+                                                <div class="pfield"><input type="password" id="input-new-password-c" minlength="14" maxlength="40" pattern="(?=.*\d)(?=.*[a-z])(?=.*[~!@#$%^&*()\-_=+[\]{};:,<>\/?|])(?=.*[A-Z]).{14,}" autocomplete="new-password" name="input-new-password-c" class="form-control form-control-alternative"><i data-associated="input-new-password-c" class="pwdicon far fa-eye"></i></div>
+                                            </div>
+                                            <div class='float-right'>
+                                                <a href="%delete_account_route%" class="btn btn-sm btn-danger">Supprimer mon compte</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
