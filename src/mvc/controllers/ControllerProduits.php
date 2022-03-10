@@ -6,7 +6,7 @@ use custombox\exceptions\ForbiddenException;
 use custombox\mvc\models\Produit;
 use custombox\mvc\models\User;
 use custombox\mvc\Renderer;
-use custombox\mvc\views\ProductView;
+use custombox\mvc\views\ProduitView;
 use Slim\Container;
 use Slim\Http\{Response, Request};
 use Slim\Exception\{MethodNotAllowedException, NotFoundException};
@@ -15,7 +15,7 @@ class ControllerProduits
 {
 
     private Container $container;
-    private ProductView $renderer;
+    private ProduitView $renderer;
     private ?Produit $product;
     private ?User $user;
     private Request $request;
@@ -26,7 +26,7 @@ class ControllerProduits
     {
         $this->container = $c;
         $this->product = Produit::where("id", "LIKE", filter_var($args['id'] ?? "", FILTER_SANITIZE_NUMBER_INT))->first();
-        $this->renderer = new ProductView($this->container, $this->product, $request);
+        $this->renderer = new ProduitView($this->container, $this->product, $request);
         $this->user = User::find($_SESSION['USER_ID'] ?? -1) ?? NULL;
         $this->request = $request;
         $this->response = $response;

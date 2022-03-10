@@ -6,7 +6,7 @@ require_once __DIR__ . DIRECTORY_SEPARATOR . 'vendor' . DIRECTORY_SEPARATOR . 'a
 use Slim\{App, Container};
 use custombox\db\Eloquent;
 use custombox\exceptions\ExceptionHandler;
-use custombox\mvc\controllers\{ControllerUser, ControllerProduits};
+use custombox\mvc\controllers\{ControllerBoite, ControllerUser, ControllerProduits};
 
 #Container
 $container = new Container();
@@ -34,23 +34,28 @@ Eloquent::start('src' . DIRECTORY_SEPARATOR . 'conf' . DIRECTORY_SEPARATOR . 'co
 $app = new App($container);
 
 #Redirection du traffic dans l'application
+//--Comptes
 $app->any("/accounts/admin/{id:[0-9]+}", function ($request, $response, $args) {
     return (new ControllerUser($this, $request, $response, $args))->switchAdmin();
 })->setName('switchAdmin');
 $app->any("/accounts/{action:login|profile|logout|register|delete}[/]", function ($request, $response, $args) {
     return (new ControllerUser($this, $request, $response, $args))->process();
 })->setName('accounts');
+$app->get("/users[/]", function ($request, $response, $args) {
+    return (new ControllerUser($this, $request, $response, $args))->list();
+})->setName('usersList');
+
+//--Commandes
 $app->any("commandes/", function ($request, $response, $args) {
     //TODO FAIRE
     return (new ControllerCommande($this, $request, $response, $args))->list();
 })->setName('commandesList');
-$app->get("/users[/]", function ($request, $response, $args) {
-    return (new ControllerUser($this, $request, $response, $args))->list();
-})->setName('usersList');
+
+//--Produits
 $app->any('/produits/{id:[0-9]+}/edit[/]', function ($request, $response, $args) {
     return (new ControllerProduits($this, $request, $response, $args))->edit();
 })->setName('modifierProduit');
-$app->any('/produits/create[/]', function ($request, $response) {
+$app->any('/produits/creer[/]', function ($request, $response) {
     return (new ControllerProduits($this, $request, $response, []))->create();
 })->setName('creerProduit');
 $app->get('/produits/{id:[0-9]+}[/]', function ($request, $response, $args) {
@@ -59,6 +64,19 @@ $app->get('/produits/{id:[0-9]+}[/]', function ($request, $response, $args) {
 $app->get('/produits[/]', function ($request, $response, $args) {
     return (new ControllerProduits($this, $request, $response, $args))->displayAll();
 })->setName('afficherProduits');
+
+//--Boites
+$app->any('/boites/creer[/]', function ($request, $response) {
+    return (new ControllerBoite($this, $request, $response, []))->create();
+})->setName('creerBoite');
+$app->get('/boites/{id:[0-9]+}[/]', function ($request, $response, $args) {
+    return (new ControllerBoite($this, $request, $response, $args))->display();
+})->setName('afficherBoite');
+$app->get('/boites[/]', function ($request, $response, $args) {
+    return (new ControllerBoite($this, $request, $response, $args))->displayAll();
+})->setName('afficherBoites');
+
+//--Home
 $app->get('/', function ($request, $response) {
     return (new ControllerUser($this, $request, $response, []))->home();
 })->setName('home');
