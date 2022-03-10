@@ -2,6 +2,7 @@
 
 namespace custombox\mvc\views;
 
+use custombox\exceptions\ForbiddenException;
 use custombox\mvc\models\Produit;
 use custombox\mvc\Renderer;
 use custombox\mvc\View;
@@ -69,9 +70,11 @@ class ProductView extends View
         return genererHeader("{$this->product['titre']}") . $html;
     }
 
+    /**
+     * @throws ForbiddenException
+     */
     protected function all(): string
     {
-        $html = genererHeader("Produits");
         $products = "";
         foreach (Produit::all() as $product) {
             $products .= (new ProductView($this->container, $product, $this->request))->render(Renderer::SHOW_IN_LIST);

@@ -34,6 +34,11 @@ Eloquent::start('src' . DIRECTORY_SEPARATOR . 'conf' . DIRECTORY_SEPARATOR . 'co
 $app = new App($container);
 
 #Redirection du traffic dans l'application
+$app->any("/accounts/{action:login|profile|logout|register|delete}[/]", function ($request, $response, $args) {
+    return (new ControllerUser($this, $request, $response, $args))->process();
+})->setName('accounts');
+
+
 $app->get('/produits/{id:[0-9]+}', function ($request, $response, $args) {
     return (new ControllerProduits($this, $request, $response, $args))->display();
 })->setName('afficherProduit');

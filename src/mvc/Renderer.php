@@ -10,6 +10,9 @@ abstract class Renderer
     const SHOW_ALL = 2;
     const CREATE = 3;
     const HOME_HOME = 5;
+    const LOGIN = 20;
+    const REGISTER = 21;
+
 
     const OTHER_MODE = 10;
     const OWNER_MODE = 100;
