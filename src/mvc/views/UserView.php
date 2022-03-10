@@ -18,7 +18,7 @@ class UserView extends View
 
     #[Pure] private function showHome(): string
     {
-        $html = genererHeader("Accueil - CustomBox");
+        $html = genererHeader("Accueil");
         $html .= <<<HTML
             BIENVENUE
         </body>

@@ -24,8 +24,27 @@ class ProductView extends View
     {
         return match ($method) {
             Renderer::SHOW_ALL => $this->all(),
+            Renderer::SHOW_IN_LIST => $this->forList(),
             default => parent::render($method, $access_level),
         };
+    }
+
+    protected function forList(): string
+    {
+        return <<<HTML
+            <div class="card">
+                <div class="card-body">
+                    <h1>{$this->product['id']}</h1>
+                    <p>{$this->product['titre']}</p>
+                    <p>{$this->product['description']}</p>
+                    <p>{$this->product['categorie']}</p>
+                    <p>{$this->product['poids']}</p>
+                    <img src="{$this->container['produits_img_dir']}{$this->product['id']}.jpg" alt="{$this->product['description']}">
+                </div>
+            </div>
+        </body>
+        </html>
+        HTML;
     }
 
     protected function show(): string
@@ -39,6 +58,7 @@ class ProductView extends View
                         <p>{$this->product['description']}</p>
                         <p>{$this->product['categorie']}</p>
                         <p>{$this->product['poids']}</p>
+                        <img src="{$this->container['produits_img_dir']}{$this->product['id']}.jpg" alt="{$this->product['description']}">
                     </div>
                 </div>
             </div>
@@ -50,14 +70,18 @@ class ProductView extends View
 
     protected function all(): string
     {
+        $html = genererHeader("Produits");
+        $products = "";
+        foreach (Produit::all() as $product) {
+            $products .= (new ProductView($this->container, $product, $this->request))->render(Renderer::SHOW_IN_LIST);
+        }
         $html = <<<HTML
             <div class="container">
-                BLKALA
+                $products
             </div>
         </body>
         </html>
         HTML;
-        return genererHeader("{$this->product['titre']}") . $html;
-
+        return genererHeader("Produits") . $html;
     }
 }
