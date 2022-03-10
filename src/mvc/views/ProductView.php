@@ -58,7 +58,7 @@ class ProductView extends View
                         <p>{$this->product['description']}</p>
                         <p>{$this->product['categorie']}</p>
                         <p>{$this->product['poids']}</p>
-                        <img src="/assets/images/produits/{$this->product['id']}" alt="{$this->product['description']}">
+                        <img src="/assets/images/produits/{$this->product['id']}.jpg" alt="{$this->product['description']}">
                     </div>
                 </div>
             </div>
