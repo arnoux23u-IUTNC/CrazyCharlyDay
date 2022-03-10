@@ -103,10 +103,28 @@ class CommandeView extends View
         HTML;
     }
 
+    public function all(): string {
+        $html ='';
+        foreach (Commande::all() as $commande){
+            $html .= (new CommandeView($this->container,$commande))->render(Renderer::SHOW);
+        }
+        return genererHeader("Liste des Commandes"). <<<HTML
+            <div>
+                <h1>Liste des Commandes</h1>
+                $html
+            </div>
+        </body>
+        </html>
+        HTML;
+
+    }
+
+
     public function render(int $method, int $access_level = Renderer::OTHER_MODE, $user = null): string
     {
         return match ($method) {
             Renderer::CREATE => $this->create(),
+            Renderer::SHOW_ALL => $this->all(),
             default => parent::render($method, $access_level),
         };
     }

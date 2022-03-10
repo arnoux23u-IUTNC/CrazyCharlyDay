@@ -86,8 +86,12 @@ class ControllerCommande
         }
     }
 
-    public function list(): void
+    public function list(): Response
     {
+        if(empty($this->user)){
+            throw new ForbiddenException("Vous n'etes pas connecté");
+        }
+        return $this->response->write($this->renderer->render(Renderer::SHOW_ALL));
 
     }
 
