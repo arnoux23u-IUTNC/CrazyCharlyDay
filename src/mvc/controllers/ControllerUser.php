@@ -92,6 +92,8 @@ class ControllerUser
             throw new ForbiddenException(message: "Acces interdit");
         switch ($this->request->getMethod()) {
             case 'GET':
+                if ($this->user->isAdmin())
+                    return $this->response->write($this->renderer->render(Renderer::SHOW, Renderer::ADMIN_MODE));
                 return $this->response->write($this->renderer->render(Renderer::SHOW));
             case 'POST':
                 if (!password_verify(filter_var($this->request->getParsedBodyParam("input-old-password"), FILTER_SANITIZE_STRING), $this->user->password))
@@ -178,6 +180,26 @@ class ControllerUser
 
     /**
      * @throws MethodNotAllowedException
+     * @throws ForbiddenException
+     */
+    public function switchAdmin(): Response{
+        if(!$this->request->getMethod() == 'POST')
+            throw new MethodNotAllowedException($this->request, $this->response, ['POST']);
+        if(!$this->user->isAdmin())
+            throw new ForbiddenException(message: "Acces interdit");
+        $user_id = filter_var($this->args['id'], FILTER_VALIDATE_INT) ?? NULL;
+        if(!$user_id)
+            throw new ForbiddenException(message: "Utilisateur introuvable");
+        $user = User::find($user_id);
+        if(!$user)
+            throw new ForbiddenException(message: "Utilisateur introuvable");
+        $user['is_admin'] = !$user['is_admin'];
+        $user->save();
+        return $this->response->withRedirect($this->container['router']->pathFor('usersList'));
+    }
+
+    /**
+     * @throws MethodNotAllowedException
      * @throws NotFoundException
      * @throws ForbiddenException
      */
@@ -191,6 +213,17 @@ class ControllerUser
             'register' => $this->register(),
             default => throw new NotFoundException($this->request, $this->response),
         };
+    }
+
+    /**
+     * @throws ForbiddenException
+     */
+    public function list(): Response
+    {
+        if (!$this->user->isAdmin()) {
+            throw new ForbiddenException(message: "Acces interdit");
+        }
+        return $this->response->write($this->renderer->render(Renderer::SHOW_ALL));
     }
 
 }

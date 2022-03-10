@@ -95,33 +95,31 @@ class ProductView extends View
         $url = $this->container->router->pathFor('creerProduit');
         $categorie = Categorie::all();
         $categ = "";
-        foreach ($categorie as $c){
-            $categ .= "<option value=" . $c['id'] . ">" .$c['nom'] ."</option><br>";
+        foreach ($categorie as $c) {
+            $categ .= "<option value=" . $c['id'] . ">" . $c['nom'] . "</option><br>";
         }
         $html = <<<HTML
             <form action='$url' method='POST'>
-			    <h2>Creer un nouveau produit</h2>
-			    			    
-			    <label>Nom du produit</label>
-			    <input type='text' name='name' placeholder='Ex: Gel Douche' required><br>
-			    
-			    <label>Entrez une description</label>
-			    <input type='text' name='desc' placeholder='Sert à se laver' required><br>
-			
-			    <label>Selectionnez une catégorie</label>
-			    <select name="categ">
-			    $categ
-			    </select><br>
-			
-			    <label>Entrez un poids</label>
-			    <input type='number' name='poids' value="0"  min="0" step="0.01" required><br>
-			
-			    <button type='submit' name='submit' value='create'>Creer Item</button>
-			</form>
+                <h2>Creer un nouveau produit</h2>
+                <label>Nom du produit</label>
+                <input type='text' name='name' placeholder='Ex: Gel Douche' required><br>
+                
+                <label>Entrez une description</label>
+                <input type='text' name='desc' placeholder='Sert à se laver' required><br>
+                
+                <label>Selectionnez une catégorie</label>
+                <select name="categ">
+                $categ
+                </select><br>
+                
+                <label>Entrez un poids</label>
+                <input type='number' name='poids' value="0"  min="0" step="0.01" required><br>
+                
+                <button type='submit' name='submit' value='create'>Creer Item</button>
+            </form>
         </body>
         </html>
-HTML;
-
+        HTML;
         return genererHeader("Creer") . $html;
     }
 }

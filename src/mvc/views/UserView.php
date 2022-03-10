@@ -2,6 +2,7 @@
 
 namespace custombox\mvc\views;
 
+use custombox\exceptions\ForbiddenException;
 use custombox\mvc\models\User;
 use custombox\mvc\Renderer;
 use custombox\mvc\View;
@@ -131,11 +132,42 @@ class UserView extends View
         return genererHeader("Inscription", ["profile.css"]) . $html;
     }
 
-    public function render(int $method, int $access_level = Renderer::OTHER_MODE): string
+    /**
+     * @throws ForbiddenException
+     */
+    private function list(): string
+    {
+        $usersHtml = "";
+        foreach (User::where('user_id','!=',$this->user['user_id'])->get() as $user) {
+            $usersHtml .= (new UserView($this->container, $user, $this->request))->render(Renderer::SHOW_IN_LIST, user:$user);
+        }
+        return genererHeader("Liste des utilisateurs") . $usersHtml;
+    }
+
+    #[Pure] private function forList($user): string
+    {
+        $adminBtn = $user->isAdmin() ? "<a href='{$this->container['router']->pathFor('switchAdmin', ['id' => $user['user_id']])}' class='btn btn-sm btn-primary'>Supprimer droit Admin</a>" : "<a href='{$this->container['router']->pathFor('switchAdmin', ['id' => $user['user_id']])}' class='btn btn-sm btn-danger'>Ajouter droit Admin</a>";
+        return <<<HTML
+            <div style="border: 1px solid black;" class="container">
+                <p>Utilisateur : {$user['username']}</p>
+                <p>Nom : {$user['lastname']}</p>
+                <p>Prénom : {$user['firstname']}</p>
+                <p>Email : {$user['mail']}</p>
+                <p>Téléphone : {$user['phone']}</p>
+                <p>Date de création : {$user['created_at']}</p>
+                <p>Date de modification : {$user['updated']} - {$user['last_ip']}</p>
+                $adminBtn
+            </div>
+        HTML;
+    }
+
+    public function render(int $method, int $access_level = Renderer::OTHER_MODE, $user = null): string
     {
         return match ($method) {
             Renderer::HOME_HOME => $this->showHome(),
             Renderer::LOGIN => $this->login(),
+            Renderer::SHOW_IN_LIST => $this->forList($user),
+            Renderer::SHOW_ALL => $this->list(),
             Renderer::SHOW => $this->show(),
             Renderer::REGISTER => $this->register(),
             default => parent::render($method, $access_level),
