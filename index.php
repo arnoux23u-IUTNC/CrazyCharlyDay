@@ -26,8 +26,8 @@ $container['notAllowedHandler'] = function () {
 $container['errorHandler'] = function () use ($container) {
     return new ExceptionHandler($container);
 };
-$container['categories_img_dir'] = __DIR__ . DIRECTORY_SEPARATOR . 'assets' . DIRECTORY_SEPARATOR . 'images' . DIRECTORY_SEPARATOR . 'categories'.DIRECTORY_SEPARATOR;
-$container['produits_img_dir'] = __DIR__ . DIRECTORY_SEPARATOR . 'assets' . DIRECTORY_SEPARATOR . 'images' . DIRECTORY_SEPARATOR . 'produits'.DIRECTORY_SEPARATOR;
+$container['categories_img_dir'] = __DIR__ . DIRECTORY_SEPARATOR . 'assets' . DIRECTORY_SEPARATOR . 'images' . DIRECTORY_SEPARATOR . 'categories';
+$container['produits_img_dir'] = __DIR__ . DIRECTORY_SEPARATOR . 'assets' . DIRECTORY_SEPARATOR . 'images' . DIRECTORY_SEPARATOR . 'produits';
 
 #Connexion à la base de données
 Eloquent::start('src' . DIRECTORY_SEPARATOR . 'conf' . DIRECTORY_SEPARATOR . 'conf.ini');
