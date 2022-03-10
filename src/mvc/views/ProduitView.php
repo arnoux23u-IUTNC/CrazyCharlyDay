@@ -146,7 +146,7 @@ class ProduitView extends View
         }
         $html = <<<HTML
             <form action='$url' method='POST'>
-                <h2>Creer un nouveau produit</h2>
+                <h2>Modifier le produit</h2>
                 <label>Nom du produit</label>
                 <input type='text' name='name' placeholder='' value="$this->product[titre]" required><br>
                 
