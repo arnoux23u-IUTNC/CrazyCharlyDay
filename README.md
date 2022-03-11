@@ -1,52 +1,39 @@
-# CrazyCharlyDay
+# CrazyCharlyDay - Winners of MVC 2022 Edition
 
-Membres : 
+![image](https://user-images.githubusercontent.com/37373941/157967402-c2ab3f05-bd97-4ddc-a041-993ff4d92d46.png)
 
-ADNET Paul 
+## Membres : 
 
-ARNOUX Guillaume
+- ADNET Paul 
+- ARNOUX Guillaume
+- GERMONVILLE-BELLET Alexandre
+- STUHLFAUTH Quentin
+- VIGNERON Steven
 
-GERMONVILLE-BELLET Alexandre
+## Liens :
 
-STUHLFAUTH Quentin
-
-VIGNERON STEINER
-
-URL Webetu : https://webetu.iutnc.univ-lorraine.fr/~arnoux23u/crazycharlyday/
-
+Webetu : https://webetu.iutnc.univ-lorraine.fr/www/arnoux23u/crazycharlyday/
 
 Trello (avec toutes les fonctionnalités réalisées) : https://trello.com/b/stQCNVi9/charlychads-crazycharlyday
 
-Fonctionnalités réalisées : 
-Affichage et style
+## Fonctionnalités réalisées : 
 
-Génération du QRCode d'une commande
+- Affichage et style
+- Génération du QRCode d'une commande
+- Liste des commandes passées : **/commandes**
+- Affichage de la liste des produits : **/produits**
+- Création d'une commande : **/commandes/creer**
+- Création d'un produit : **/produits/creer
+- Accès sans authentification
+- Création d'une boite : **/boites/creer**
+- Modification d'une boite : **/boites/[*ID*]/edit**
+- Modification d'un produit : **/produits/[*ID*]/edit**
+- Création d'un nouveau compte : **/accounts/register/
+- Accès avec authentification
+- Modification d'un compte : **/accounts/profile**
+- Affichage de la liste des utilisateurs pour les administrateurs : **/accounts/users**
+- Compte administrateur (LOGIN: test, MDP: b4fDqk44S9R9fTE*) : **/accounts/login**
 
-Liste des commandes passées https://webetu.iutnc.univ-lorraine.fr/www/arnoux23u/crazycharlyday/commandes
+## Remerciements
 
-Affichage de la liste des produits https://webetu.iutnc.univ-lorraine.fr/www/arnoux23u/crazycharlyday/produits
-
-Création d'une commande https://webetu.iutnc.univ-lorraine.fr/www/arnoux23u/crazycharlyday/commandes/creer
-
-Création d'un produit https://webetu.iutnc.univ-lorraine.fr/www/arnoux23u/crazycharlyday/produits/creer
-
-Accès sans authentification https://webetu.iutnc.univ-lorraine.fr/www/arnoux23u/crazycharlyday
-
-Création d'une boite https://webetu.iutnc.univ-lorraine.fr/www/arnoux23u/crazycharlyday/boites/creer
-
-Modification d'une boite https://webetu.iutnc.univ-lorraine.fr/www/arnoux23u/crazycharlyday/boites/edit
-
-Modification d'un produit https://webetu.iutnc.univ-lorraine.fr/www/arnoux23u/crazycharlyday/produits/edit
-
-Création d'un nouveau compte https://webetu.iutnc.univ-lorraine.fr/www/arnoux23u/crazycharlyday/account/register
-
-Accès avec authentification
-
-Modification d'un compte https://webetu.iutnc.univ-lorraine.fr/www/arnoux23u/crazycharlyday/account/profile
-
-Affichage de la liste des utilisateurs pour les administrateurs https://webetu.iutnc.univ-lorraine.fr/www/arnoux23u/crazycharlyday/account/users
-
-Compte administrateur (LOGIN: test@test.fr, MDP: b4fDqk44S9R9fTE*) https://webetu.iutnc.univ-lorraine.fr/www/arnoux23u/crazycharlyday/account/login
-
-
-
+Un grand merci à l'[IUT Nancy-Charlemagne](https://iut-charlemagne.univ-lorraine.fr/), à l'[Atelier 17.91](https://www.atelier1791.fr/) et à toutes les entreprises et associations partenaires sans qui la journée n'aurait pu avoir lieu ❤️
